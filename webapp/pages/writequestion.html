@@ -2,17 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Answer a Question about {{Topic}}</title>
+    <title>Ask a new question about {{Topic}}</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
   <header>
-	  <h2>Answer a question about {{Topic}}</h2>
+	  <h2>Ask a new question about {{Topic}}</h2>
   </header>
-    <p>We are interested in learning more about {{Topic}}. Please answer the following question to the best of your ability.</p>
+    <p>You recently answered the following question:</p>
+    <blockquote>{{Question}}</blockquote>
     <div class="box">
-      <h3>{{Question}} goes here...</h3>
-      <textarea type="text" name="answer" placeholder="Please use a complete sentece."></textarea>
+    <h3>Now ask a deeper question...</h3>
+    <textarea type="text" name="answer" placeholder="Please write it carefully."></textarea>
     </div>
     <p class="disclaimer">The quality of your submissions influence your payment and bonuses you earn.</p>
     <input class="submitButton" type="submit" value="Submit">
