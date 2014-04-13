@@ -413,16 +413,6 @@ optgroup {
  * Remove most spacing between table cells.
  */
 
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-td,
-th {
-    padding: 0;
-}
-
 .box {
     margin: 0 0 1em 0;
     padding: 10px;
@@ -474,6 +464,11 @@ table {
     border-spacing: 0; 
     table-layout: fixedauto;
     width: 100%;
+}
+
+td,
+th {
+    padding: 0;
 }
 
 #headerRow {
