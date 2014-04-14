@@ -1,0 +1,37 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Ask a new question about</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  </head>
+  <body>
+  <header>
+	  <h2>Ask a new question about <span id="topic">topic</span></h2>
+  </header>
+    <p>You recently answered the following question:</p>
+    <p id="question"></p>
+    <div class="box">
+    <h3>Now ask a new question based on this question</h3>
+    <textarea type="text" name="answer" placeholder="Please write it carefully."></textarea>
+    </div>
+    <p class="disclaimer">NOTE: The quality of your submissions influence your payment and bonuses you earn.</p>
+    <p>Example: original question: what elements a cabin for vacation needs to have? A deeper question: what makes a cabin comfy? </p>
+    <input class="submitButton" type="submit" value="Submit">
+    <input class="submitButton" type="submit" value="Answer a new question" onclick="location.href='answerQuestion.html'">
+
+     <script>
+      var topic = "Design a chair for classrooms";
+      var question = "What's the color of the chair?";
+      var answer; 
+
+      document.getElementById("topic").innerHTML=topic;
+      document.getElementById("question").innerHTML=question;
+      answer = $("#answer").val();
+    </script>
+
+  </body>
+
+
+</html>
