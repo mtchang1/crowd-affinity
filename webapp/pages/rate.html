@@ -11,7 +11,7 @@
   </header>
     <p>Please rate the question you just answered and answers from others in the community.</p>
     <p>For reference, we have included the question here:</p>
-    <blockquote>{{Question}}</blockquote>
+    <p id="question">{{Question}}</p>
     <form id="CESDForm">
 	    <div class="box">
 	    <h3>Rate the Question</h3>
@@ -25,21 +25,21 @@
           <td class="ratingColm"><strong>Strongly Disagree</strong></td>
         </tr>
         <tr class="questionRow">
-          <td class="questionColm">The question is relevant to {{Topic}}</td>
+          <td class="questionColm">The question is relevant to <span id="topic"></span></td>
           <td><input type="radio" name="QR1" value="0"></td>
           <td><input type="radio" name="QR1" value="1"></td>
           <td><input type="radio" name="QR1" value="2"></td>
           <td><input type="radio" name="QR1" value="3"></td>
         </tr>
         <tr class="questionRow">
-          <td class="questionColm">The question is clear</td>
+          <td class="questionColm">The question is clear and consice</td>
           <td><input type="radio" name="QR2" value="0"></td>
           <td><input type="radio" name="QR2" value="1"></td>
           <td><input type="radio" name="QR2" value="2"></td>
           <td><input type="radio" name="QR2" value="3"></td>
         </tr>
         <tr class="questionRow">
-          <td class="questionColm">The question is interesting</td>
+          <td class="questionColm">The question is worth to generate many answers</td>
           <td><input type="radio" name="QR3" value="0"></td>
           <td><input type="radio" name="QR3" value="1"></td>
           <td><input type="radio" name="QR3" value="2"></td>
@@ -59,21 +59,21 @@
           <td class="ratingColm"><strong>Very Good</strong></td>
         </tr>
         <tr class="questionRow">
-          <td class="questionColm">{{Answer 1}}</td>
+          <td class="questionColm" id="answer1"></td>
           <td><input type="radio" name="AR1" value="0"></td>
           <td><input type="radio" name="AR1" value="1"></td>
           <td><input type="radio" name="AR1" value="2"></td>
           <td><input type="radio" name="AR1" value="3"></td>
         </tr>
         <tr class="questionRow">
-          <td class="questionColm">{{Answer 2}}</td>
+          <td class="questionColm" id="answer2"></td>
           <td><input type="radio" name="AR2" value="0"></td>
           <td><input type="radio" name="AR2" value="1"></td>
           <td><input type="radio" name="AR2" value="2"></td>
           <td><input type="radio" name="AR2" value="3"></td>
         </tr>
         <tr class="questionRow">
-          <td class="questionColm">{{Answer 3}}</td>
+          <td class="questionColm" id="answer3"></td>
           <td><input type="radio" name="AR3" value="0"></td>
           <td><input type="radio" name="AR3" value="1"></td>
           <td><input type="radio" name="AR3" value="2"></td>
@@ -82,7 +82,26 @@
       </table>
       </div>
     <p class="disclaimer">The quality of your submissions influence your payment and bonuses you earn.</p>
-    <input class="submitButton" type="submit" value="Submit">
+    
     </form>
+
+    <input class="submitButton" type="submit" value="Next" onclick="location.href='decideWhatsNext.html'">
+    <script>
+      var topic = "Design a chair for classrooms";
+      var question = "What's the color of the chair?";
+      var answer1, answer2, answer3; 
+
+      answer1="red, because it's distracting";
+      answer2="the color of the chair is not important";
+      answer3="blue, because I like blue";
+
+      document.getElementById("topic").innerHTML=topic;
+      document.getElementById("question").innerHTML=question;
+
+      document.getElementById("answer1").innerHTML=answer1;
+      document.getElementById("answer2").innerHTML=answer2;
+      document.getElementById("answer3").innerHTML=answer3;
+      
+    </script>
   </body>
 </html>
