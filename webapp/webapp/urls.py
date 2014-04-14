@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from crowd_affinity.views import *
 from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
@@ -20,6 +21,7 @@ urlpatterns = patterns('',
               {'document_root': settings.STATIC_ROOT,
                        'show_indexes': True}),
     # urls
-    #(r'^index/?$', index),
+    (r'^$', start1),
+    (r'^answerQuestion.html/?$', answerQuestion),
 
     )
