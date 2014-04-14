@@ -11,27 +11,27 @@
 	  <h2>Rate the Sentence</h2>
   </header>
    
-    <p class="disclaimer">Do you agree that this is a good sentence that integrates the question and answer?</p>
+    <p class="disclaimer">Please rewrite the sentence. </p>
     
     <div class="box">
-      <p>Question: <span id="question"></span></p>
-      <p>Answer: <span id="answer"></span></p>
-      <p>Sentence: <span id="sentence"></span></p>
+      <p>Question: <span id="question">{{ question }}</span></p>
+      <p>Answer: <span id="answer">{{ answer }}</span></p>
+      <p>Sentence: <span id="sentence">{{ sentence }}</span></p>
     </div>
 
     <input class="submitButton" type="submit" value="Yes" onclick="location.href='phase2tagSentence.html'">
-    <input class="submitButton" type="submit" value="No" onclick="location.href='phase2rateSentence.html'">
+    <input class="submitButton" type="submit" value="No" onclick="location.href='phase2rewriteSentence.html'">
 
     <script>
-      //var topic = "Design a chair for classrooms";
-      var question = "What's the color of the chair?";
-      var answer = "green, because it looks clean and refreshing.";
-      var sentence = "The color of the chair should be green, because it looks clean and refreshing.";
+      // //var topic = "Design a chair for classrooms";
+      // var question = "What's the color of the chair?";
+      // var answer = "green, because it looks clean and refreshing.";
+      // var sentence = "The color of the chair should be green, because it looks clean and refreshing.";
 
-      //document.getElementById("topic").innerHTML=topic;
-      document.getElementById("question").innerHTML=question;
-      document.getElementById("answer").innerHTML=answer;
-       document.getElementById("sentence").innerHTML=sentence;
+      // //document.getElementById("topic").innerHTML=topic;
+      // document.getElementById("question").innerHTML=question;
+      // document.getElementById("answer").innerHTML=answer;
+      //  document.getElementById("sentence").innerHTML=sentence;
 
     </script>
   </body>
