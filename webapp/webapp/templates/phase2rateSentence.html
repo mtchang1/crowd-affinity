@@ -12,16 +12,21 @@
   </header>
    
     <p class="disclaimer">Please rewrite the sentence. </p>
-    
+    <form method="post">
     <div class="box">
       <p>Question: <span id="question">{{ question }}</span></p>
       <p>Answer: <span id="answer">{{ answer }}</span></p>
       <p>Sentence: <span id="sentence">{{ sentence }}</span></p>
     </div>
+    
+    <div>
+    <input type="radio" name="rateSentence" value="Yes" /> Yes
+    <input type="radio" name="rateSentence" value="No" /> No
+    </div>
 
-    <input class="submitButton" type="submit" value="Yes" onclick="location.href='phase2tagSentence.html'">
-    <input class="submitButton" type="submit" value="No" onclick="location.href='phase2rewriteSentence.html'">
-
+    <input class="submitButton" type="submit" value="Next">
+   
+    </form>
     <script>
       // //var topic = "Design a chair for classrooms";
       // var question = "What's the color of the chair?";

@@ -13,21 +13,23 @@
    
     <p class="disclaimer">Please add some tags/keywords to decribe this sentence.</p>
     
+    <form method="post">
     <div class="box">
-      <p>Sentence: <span id="sentence"></span></p>
+      <p>Sentence: <span id="sentence">{{ setence }}</span></p>
     </div>
 
     <div class="box">
-     <textarea type="text" id="answer" name="answer" placeholder="Please use ',' to seperate multiple tags"></textarea>
+     <textarea type="text" id="tags" name="tags" placeholder="Please use ',' to seperate multiple tags"></textarea>
     </div>
 
     <input class="submitButton" type="submit" value="Submit" onclick="location.href='phase2MakeSentence.html'">
+    </form>
 
     <script>
-      //var topic = "Design a chair for classrooms";
-      var sentence = "The color of the chair should be green, because it looks clean and refreshing.";
+      // //var topic = "Design a chair for classrooms";
+      // var sentence = "The color of the chair should be green, because it looks clean and refreshing.";
 
-      document.getElementById("sentence").innerHTML=sentence;
+      // document.getElementById("sentence").innerHTML=sentence;
 
     </script>
   </body>

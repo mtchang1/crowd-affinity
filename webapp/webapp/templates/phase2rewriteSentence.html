@@ -12,23 +12,24 @@
   </header>
    
     <p class="disclaimer">Please integrate the question and the answer into one independent setence.</p>
-
+   <form method="post">
     <div class="box">
       <p>Question: <span id="question"></span></p><p>Answer: <span id="answer"></span></p>
       <textarea type="text" id="sentence" name="answer" placeholder="Please use a complete sentece."></textarea>
     </div>
 
     <input class="submitButton" type="submit" value="Next" onclick="location.href='phase2tagSentence.html'">
+    </form>
 
     <script>
-      //var topic = "Design a chair for classrooms";
-      var question = "What's the color of the chair?";
-      var answer = "green, because it looks clean and refreshing.";
+      // //var topic = "Design a chair for classrooms";
+      // var question = "What's the color of the chair?";
+      // var answer = "green, because it looks clean and refreshing.";
 
-      //document.getElementById("topic").innerHTML=topic;
-      document.getElementById("question").innerHTML=question;
-      document.getElementById("answer").innerHTML=answer;
-      answer = $("#sentence").val();
+      // //document.getElementById("topic").innerHTML=topic;
+      // document.getElementById("question").innerHTML=question;
+      // document.getElementById("answer").innerHTML=answer;
+      // answer = $("#sentence").val();
     </script>
   </body>
 </html>

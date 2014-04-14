@@ -12,7 +12,7 @@
     <p>Please rate the question you just answered and answers from others in the community.</p>
     <p>For reference, we have included the question here:</p>
     <p id="question">{{Question}}</p>
-    <form id="CESDForm">
+    <form method="post">
 	    <div class="box">
 	    <h3>Rate the Question</h3>
       <p>How much do you agree with the following statements about the question above:</p>
@@ -25,7 +25,7 @@
           <td class="ratingColm"><strong>Strongly Disagree</strong></td>
         </tr>
         <tr class="questionRow">
-          <td class="questionColm">The question is relevant to <span id="topic"></span></td>
+          <td class="questionColm">The question is relevant to <span >{{ topic }}</span></td>
           <td><input type="radio" name="QR1" value="0"></td>
           <td><input type="radio" name="QR1" value="1"></td>
           <td><input type="radio" name="QR1" value="2"></td>
@@ -82,10 +82,11 @@
       </table>
       </div>
     <p class="disclaimer">The quality of your submissions influence your payment and bonuses you earn.</p>
-    
+     <input class="submitButton" type="submit" value="Next" >
+
     </form>
 
-    <input class="submitButton" type="submit" value="Next" onclick="location.href='decideWhatsNext.html'">
+   
     <script>
     //   var topic = "Design a chair for classrooms";
     //   var question = "What's the color of the chair?";
