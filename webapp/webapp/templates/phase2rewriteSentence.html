@@ -8,15 +8,21 @@
   </head>
   <body>
   <header>
-    <h2>Rewrite The Sentence</h2>
+    <h2>Revise The Sentence</h2>
   </header>
    
-    <p class="disclaimer">Please integrate the question and the answer into one independent setence.</p>
+    <p>Improve the sentence describing this question and answer.</p>
    <form method="post">
     <div class="box">
-      <p>Question: <span id="question"></span></p><p>Answer: <span id="answer"></span></p>
-      <textarea type="text" id="sentence" name="answer" placeholder="Please use a complete sentece."></textarea>
+    <h3>Rewrite the Sentence Below</h3>
+    <p><strong>Question</strong></p>
+    <blockquote>{{ question }}</blockquote>
+    <p><strong>Answer</strong></p>
+    <blockquote>{{ answer }}</blockquote>
+    <textarea type="text" id="sentence" name="answer" placeholder="{{ sentence }}"></textarea>
     </div>
+
+    <p class="disclaimer">Thank you for improving this sentence.</p>
 
     <input class="submitButton" type="submit" value="Next" onclick="location.href='phase2tagSentence.html'">
     </form>

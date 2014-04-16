@@ -2,35 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Answer a Question</title>
+    <title>Answer a Question {{ topic }}</title>
     <link rel="stylesheet" href="style.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   </head>
   <body>
   <header>
-	  <h2>Answer a Question</h2>
+	  <h2>Answer a Question about {{ topic }}</h2>
   </header>
     <form method="post">
-    <p>We are interested in learning more about <span id="topic"></span>. </p> 
-    <p class="disclaimer">Please answer the following question to the best of your ability. If you don't know the answer, please choose "I don't know" to skip this question.The quality of your submissions influence your payment and bonuses you earn.</p>
-    
-    <div class="box">
-      <h3 id="question"></h3>
-      <textarea type="text" id="answer" name="answer" placeholder="Please use a complete sentece."></textarea>
+    <p>Answer the question above to the best of your ability. If you don't know the answer, choose "I don't know" to skip this question.</p>
+
+    <div class="box"> 
+      <h3>Answer clearly</h3>
+      <p>{{ question }}</p>
+      <textarea type="text" id="answer" name="answer" placeholder="Please answer thoughtfully."></textarea>
     </div>
+
+    <p class="disclaimer">Please carefully consider your answer. The quality of your submissions influence your payment and bonuses you earn.</p>
 
     <input class="submitButton" type="submit" value="Next" >
     <input class="submitButton" type="submit" value="I don't know">
   
     </form>
-    <script>
-      var topic = "Design a chair for classrooms";
-      var question = "What's the color of the chair?";
-      var answer; 
-
-      document.getElementById("topic").innerHTML=topic;
-      document.getElementById("question").innerHTML=question;
-      answer = $("#answer").val();
-    </script>
   </body>
 </html>

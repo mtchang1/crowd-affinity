@@ -11,14 +11,19 @@
     <h2>Integrate a question and an answer</h2>
   </header>
    
-    <p class="disclaimer">Please integrate the question and the answer into one independent setence.</p>
+    <p>Please rephrase the question and the answer into a single sentence.</p>
     <form method="post">
     <div class="box">
-      <p>Question: <span id="question">{{ question }}</span></p>
-      <p>Answer: <span id="answer">{{ answer }}</span></p>
+      <h3>Rephrase in a sentence</h3>
+      <p><strong>Question</strong></p>
+      <blockquote>{{ question }}</blockquote>
+      <p><strong>Answer</strong></p>
+      <blockquote>{{ answer }}</blockquote>
       <textarea type="text" id="sentence" name="answer" placeholder="Please use a complete sentece."></textarea>
     </div>
 
+    <p class="disclaimer">Check your sentence. The quality of your work will influence the payment you receive.</p>
+    
     <input class="submitButton" type="submit" value="Next" onclick="location.href='phase2rateSentence.html'">
 
     </form>

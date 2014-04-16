@@ -11,19 +11,31 @@
 	  <h2>Rate the Sentence</h2>
   </header>
    
-    <p class="disclaimer">Please rewrite the sentence. </p>
+    <p>Please indicate how well the sentence describes the question and answer.</p>
     <form method="post">
     <div class="box">
-      <p>Question: <span id="question">{{ question }}</span></p>
-      <p>Answer: <span id="answer">{{ answer }}</span></p>
-      <p>Sentence: <span id="sentence">{{ sentence }}</span></p>
+      <h3>How relevant is the sentence?</h3>
+      <p><strong>Question</strong></p>
+      <blockquote>{{ question }}</blockquote>
+      <p><strong>Answer</strong></p>
+      <blockquote>{{ answer }}</blockquote>
+      <p><strong>Sentence</strong></p>
+      <blockquote>{{ sentence }}</blockquote>
+      <table>
+        <tr id="headerRow">
+          <td class="ratingColm"><strong>Very Irrelevant</strong></td>
+          <td class="ratingColm"><strong>Somewhat Irrelevant</strong></td>
+          <td class="ratingColm"><strong>Somewhat Relevant</strong></td>
+          <td class="ratingColm"><strong>Very Relevant</strong></td>
+        </tr>
+        <tr class="questionRow">
+          <td><input type="radio" name="AR1" value="0"></td>
+          <td><input type="radio" name="AR1" value="1"></td>
+          <td><input type="radio" name="AR1" value="2"></td>
+          <td><input type="radio" name="AR1" value="3"></td>
+        </tr>
+      </table>
     </div>
-    
-    <div>
-    <input type="radio" name="rateSentence" value="Yes" /> Yes
-    <input type="radio" name="rateSentence" value="No" /> No
-    </div>
-
     <input class="submitButton" type="submit" value="Next">
    
     </form>
