@@ -13,16 +13,16 @@
    
     <p class="disclaimer">Please add some tags/keywords to decribe this sentence.</p>
     
-    <form method="post">
+    <form method="post" action='/write'> {% csrf_token %}
     <div class="box">
-      <p>Sentence: <span id="sentence">{{ setence }}</span></p>
+      <p>Sentence: <span id="sentence">{{ sentence }}</span></p>
     </div>
 
     <div class="box">
      <textarea type="text" id="tags" name="tags" placeholder="Please use ',' to seperate multiple tags"></textarea>
     </div>
 
-    <input class="submitButton" type="submit" value="Submit" onclick="location.href='phase2MakeSentence.html'">
+    <input class="submitButton" type="submit" value="Submit">
     </form>
 
     <script>

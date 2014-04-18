@@ -12,13 +12,13 @@
   </header>
    
     <p class="disclaimer">Please integrate the question and the answer into one independent setence.</p>
-   <form method="post">
+    <form method="post" action='tag'> {% csrf_token %}
     <div class="box">
       <p>Question: <span id="question"></span></p><p>Answer: <span id="answer"></span></p>
       <textarea type="text" id="sentence" name="answer" placeholder="Please use a complete sentece."></textarea>
     </div>
 
-    <input class="submitButton" type="submit" value="Next" onclick="location.href='phase2tagSentence.html'">
+    <input class="submitButton" type="submit" value="Next">
     </form>
 
     <script>

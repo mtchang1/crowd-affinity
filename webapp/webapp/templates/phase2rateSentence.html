@@ -11,22 +11,14 @@
 	  <h2>Rate the Sentence</h2>
   </header>
    
-    <p class="disclaimer">Please rewrite the sentence. </p>
-    <form method="post">
+    <p class="disclaimer">Please let us know whether the following sentence appropriately summarizes the question and answer. </p>
     <div class="box">
       <p>Question: <span id="question">{{ question }}</span></p>
       <p>Answer: <span id="answer">{{ answer }}</span></p>
       <p>Sentence: <span id="sentence">{{ sentence }}</span></p>
-    </div>
-    
-    <div>
-    <input type="radio" name="rateSentence" value="Yes" /> Yes
-    <input type="radio" name="rateSentence" value="No" /> No
-    </div>
-
-    <input class="submitButton" type="submit" value="Next">
-   
-    </form>
+    </div> 
+    <input class="submitButton" type="submit" value="Yes" onclick="location.href='tag'">
+    <input class="submitButton" type="submit" value="No" onclick="location.href='rewrite'">
     <script>
       // //var topic = "Design a chair for classrooms";
       // var question = "What's the color of the chair?";

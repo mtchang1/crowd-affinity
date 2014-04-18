@@ -21,7 +21,17 @@ urlpatterns = patterns('',
               {'document_root': settings.STATIC_ROOT,
                        'show_indexes': True}),
     # urls
-    (r'^$', start1),
-    (r'^answerQuestion.html/?$', answerQuestion),
+    (r'^start1/$', start1),
+    (r'^answerQuestion/?$', answerQuestion),
+    (r'^askQuestion/?$', askQuestion),
+    (r'^rate/?$', rate),
+    (r'^decide/?$', decide),
+
+    (r'^start2/$', start2),
+    (r'^write/?$', write),
+    (r'^rewrite/?$', rewrite),
+    (r'^rateSentence/?$', rateSentence),
+    (r'^tag/?$', tag),
+
 
     )

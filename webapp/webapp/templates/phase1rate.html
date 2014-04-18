@@ -12,7 +12,7 @@
     <p>Please rate the question you just answered and answers from others in the community.</p>
     <p>For reference, we have included the question here:</p>
     <p id="question">{{Question}}</p>
-    <form method="post">
+    <form method="post" action='/decide'> {% csrf_token %} 
 	    <div class="box">
 	    <h3>Rate the Question</h3>
       <p>How much do you agree with the following statements about the question above:</p>
