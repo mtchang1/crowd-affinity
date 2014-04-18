@@ -21,7 +21,7 @@
   <p>You recently answered:</p>
   <blockquote>{{ question }}</blockquote>
   <p>Think about this question and consider how you could make it deeper. Fill in your suggestion below</p>
-    <form method="post">
+  <form method="post"> {% csrf_token %}
     <div class="box">
     <h3>Ask a deeper question</h3>
     <textarea type="text" name="answer" placeholder="Please write thoughtfully."></textarea>
@@ -30,10 +30,4 @@
     <input class="submitButton" type="submit" value="Submit" >
     </form>
   </body>
-<<<<<<< HEAD
-
-
 </html>
-=======
-</html>
->>>>>>> 6a1919d2a852d57dcc193a3083252b8081ad84b0

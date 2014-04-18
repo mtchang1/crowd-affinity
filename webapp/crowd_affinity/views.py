@@ -24,18 +24,16 @@ def answerQuestion(request):
         q_id = q.id
         q_text = q.question_text
     
-    if request.method == "post":
-        if request.POST.get('answer'):
-            text =request.POST.get('answer')
+    if request.POST.get('answer'):
+        text = request.POST.get('answer')
 
-            #dummy vars
-            user = "test user";
-            answer = Answer(question_id=q_id, answer_text=text, user_id=user)
-            answer.save()
+        #dummy vars
+        user = "test user"; 
+        answer = Answer(question_id=q_id, answer_text=text, user_id=user)
+        answer.save()
 
-            return render(request, 'phase1rate.html')
-        else:
-            pass
+        return render(request, 'phase1rate.html')
+
     else: 
         return render(request, 'phase1answerQuestion.html', {'question':q_text})
 
@@ -54,6 +52,7 @@ def askQuestion(request):
         return render(request, 'phase1askQuestion.html')
 
 def rate(request):
+    #TODO: based on rating, determine whether -> tag or -> rewrite
     return render(request, 'phase1rate.html')
 
 def decide(request):
