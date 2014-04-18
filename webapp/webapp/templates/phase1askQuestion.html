@@ -2,36 +2,38 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Ask a new question about</title>
+    <title>Ask a new question about {{ topic }}</title>
     <link rel="stylesheet" href="style.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   </head>
   <body>
   <header>
-	  <h2>Ask a new question about <span id="topic">{{ topic }}</span></h2>
+	  <h2>Ask a new question about {{ topic }}</h2>
   </header>
-    <p>You recently answered the following question:</p>
-    <p id="question">{{ question }}</p>
-    <form method="post"> {% csrf_token %} 
+  <p>In this task, you will ask a deeper question, related to the one you just answered. There's an example below.</p>
+  <div class="box">
+    <h3>Example new question</h3>
+    <p><strong>Original question:</strong></p>
+    <blockquote>What elements a cabin for vacation needs to have?</blockquote>
+    <p><strong>A deeper question:</strong></p>
+    <blockquote>What makes a cabin comfy?</blockquote>
+  </div>
+
+  <p>You recently answered:</p>
+  <blockquote>{{ question }}</blockquote>
+  <p>Think about this question and consider how you could make it deeper. Fill in your suggestion below</p>
+    <form method="post">
     <div class="box">
-    <h3>Now ask a new question based on this question</h3>
-    <textarea type="text" id="answer" name="answer" placeholder="Please write it carefully."></textarea>
+    <h3>Ask a deeper question</h3>
+    <textarea type="text" name="answer" placeholder="Please write thoughtfully."></textarea>
     </div>
     <p class="disclaimer">NOTE: The quality of your submissions influence your payment and bonuses you earn.</p>
-    <p>Example: original question: what elements a cabin for vacation needs to have? A deeper question: what makes a cabin comfy? </p>
-    <input class="submitButton" type="submit" value="Submit">
+    <input class="submitButton" type="submit" value="Submit" >
     </form>
-     <script>
-      // var topic = "Design a chair for classrooms";
-      // var question = "What's the color of the chair?";
-      // var answer; 
-
-      // document.getElementById("topic").innerHTML=topic;
-      // document.getElementById("question").innerHTML=question;
-      // answer = $("#answer").val();
-    </script>
-
   </body>
+<<<<<<< HEAD
 
 
 </html>
+=======
+</html>
+>>>>>>> 6a1919d2a852d57dcc193a3083252b8081ad84b0

@@ -11,14 +11,35 @@
 	  <h2>Rate the Sentence</h2>
   </header>
    
-    <p class="disclaimer">Please let us know whether the following sentence appropriately summarizes the question and answer. </p>
+    <p>Please indicate how well the sentence describes the question and answer.</p>
+    <form method="post">
     <div class="box">
-      <p>Question: <span id="question">{{ question }}</span></p>
-      <p>Answer: <span id="answer">{{ answer }}</span></p>
-      <p>Sentence: <span id="sentence">{{ sentence }}</span></p>
-    </div> 
-    <input class="submitButton" type="submit" value="Yes" onclick="location.href='tag'">
-    <input class="submitButton" type="submit" value="No" onclick="location.href='rewrite'">
+      <h3>How relevant is the sentence?</h3>
+      <p><strong>Question</strong></p>
+      <blockquote>{{ question }}</blockquote>
+      <p><strong>Answer</strong></p>
+      <blockquote>{{ answer }}</blockquote>
+      <p><strong>Sentence</strong></p>
+      <blockquote>{{ sentence }}</blockquote>
+      <table>
+        <tr id="headerRow">
+          <td class="ratingColm"><strong>Very Irrelevant</strong></td>
+          <td class="ratingColm"><strong>Somewhat Irrelevant</strong></td>
+          <td class="ratingColm"><strong>Somewhat Relevant</strong></td>
+          <td class="ratingColm"><strong>Very Relevant</strong></td>
+        </tr>
+        <tr class="questionRow">
+          <td><input type="radio" name="AR1" value="0"></td>
+          <td><input type="radio" name="AR1" value="1"></td>
+          <td><input type="radio" name="AR1" value="2"></td>
+          <td><input type="radio" name="AR1" value="3"></td>
+        </tr>
+      </table>
+    </div>
+    <input class="submitButton" type="submit" value="Next">
+   
+    </form>
+>>>>>>> 6a1919d2a852d57dcc193a3083252b8081ad84b0
     <script>
       // //var topic = "Design a chair for classrooms";
       // var question = "What's the color of the chair?";

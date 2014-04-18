@@ -11,16 +11,15 @@
 	  <h2>Tag the Sentence</h2>
   </header>
    
-    <p class="disclaimer">Please add some tags/keywords to decribe this sentence.</p>
+    <p>Please add some tags/keywords to decribe this sentence.</p>
     
     <form method="post" action='/write'> {% csrf_token %}
     <div class="box">
-      <p>Sentence: <span id="sentence">{{ sentence }}</span></p>
-    </div>
-
-    <div class="box">
+      <h3>What tags describe this sentence?</h3>
+      <p>{{ sentence }}</p>
      <textarea type="text" id="tags" name="tags" placeholder="Please use ',' to seperate multiple tags"></textarea>
     </div>
+    <p class="disclaimer">Please check your tags. The quality of your work will influence the payment you receive. </p>
 
     <input class="submitButton" type="submit" value="Submit">
     </form>

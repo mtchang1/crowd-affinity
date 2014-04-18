@@ -10,12 +10,17 @@
 	  <h2>Rate Questions and Answers</h2>
   </header>
     <p>Please rate the question you just answered and answers from others in the community.</p>
+<<<<<<< HEAD
     <p>For reference, we have included the question here:</p>
     <p id="question">{{Question}}</p>
     <form method="post" action='/decide'> {% csrf_token %} 
+=======
+    <form method="post">
+>>>>>>> 6a1919d2a852d57dcc193a3083252b8081ad84b0
 	    <div class="box">
 	    <h3>Rate the Question</h3>
-      <p>How much do you agree with the following statements about the question above:</p>
+      <p>How much do you agree with the following statements about the following question:</p>
+      <blockquote>{{ question }}</blockquote>
       <table>
         <tr id="headerRow">
           <td class="questionColm"><strong></strong></td>
@@ -49,7 +54,8 @@
 	    </div>
       <div class="box">
       <h3>Rate other's Answers</h3>
-      <p>How well does each of these answer the question:</p>
+      <p>How good is each answer to the following question:</p>
+      <blockquote>{{ question }}</blockquote>
       <table>
         <tr id="headerRow">
           <td class="questionColm"><strong></strong></td>
@@ -81,7 +87,7 @@
         </tr>
       </table>
       </div>
-    <p class="disclaimer">The quality of your submissions influence your payment and bonuses you earn.</p>
+    <p class="disclaimer">The quality of your submissions influence your payment and bonuses you earn. Please answer carefully.</p>
      <input class="submitButton" type="submit" value="Next" >
 
     </form>

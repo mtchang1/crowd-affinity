@@ -10,14 +10,9 @@
   <header>
 	  <h2>Answer a Question</h2>
   </header>
-  <form method="post"> {% csrf_token %} 
-      <p>We are interested in learning more about <span id="topic"></span>. </p> 
-    <p class="disclaimer">Please answer the following question to the best of your ability. If you don't know the answer, please choose "I don't know" to skip this question. The quality of your submissions influence your payment and bonuses you earn.</p>
-    
-    <div class="box">
-        <h3 id="question"> {{ question }} </h3>
-        <textarea type="text" id="answer" name="answer" placeholder="Please use a complete sentence."></textarea>
-    </div>
+  <form method="post"> {% csrf_token %}
+
+    <p>Answer the question above to the best of your ability. If you don't know the answer, choose "I don't know" to skip this question.</p>
 
     <input class="submitButton" type="submit" value="Next" >
   </form>
