@@ -13,7 +13,7 @@
    
     <p>Please add some tags/keywords to decribe this sentence.</p>
     
-    <form method="post" action='/write'> {% csrf_token %}
+    <form name="tagSentence" method="post" action='/write' onsubmit="return validateForm()"> {% csrf_token %}
     <div class="box">
       <h3>What tags describe this sentence?</h3>
       <p>{{ sentence }}</p>
@@ -23,13 +23,23 @@
 
     <input class="submitButton" type="submit" value="Submit">
     </form>
+<script>
+function validateForm()
+  {
+  var answer = document.forms["tagSentence"]["tags"].value;
+   
+  while(answer.lastIndexOf(" ")>=0){
+    answer = answer.replace(" ","");
+    }
 
-    <script>
-      // //var topic = "Design a chair for classrooms";
-      // var sentence = "The color of the chair should be green, because it looks clean and refreshing.";
+  if ( answer == null || answer =="" || answer.length==0)
+    {
+    alert("Please write the answer");
+    return false;
+    }
 
-      // document.getElementById("sentence").innerHTML=sentence;
-
-    </script>
+  }
+  </script>
+    
   </body>
 </html>

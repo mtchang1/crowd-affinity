@@ -12,7 +12,7 @@
   </header>
    
     <p>Please indicate how well the sentence describes the question and answer.</p>
-    <form method="post"> {% csrf_token %}
+    <form name = "rateSentence" method="post" onsubmit="return validateForm()"> {% csrf_token %}
     <div class="box">
       <h3>How relevant is the sentence?</h3>
       <p><strong>Question</strong></p>
@@ -39,17 +39,19 @@
     <input class="submitButton" type="submit" value="Next">
    
     </form>
-   <script>
-      // //var topic = "Design a chair for classrooms";
-      // var question = "What's the color of the chair?";
-      // var answer = "green, because it looks clean and refreshing.";
-      // var sentence = "The color of the chair should be green, because it looks clean and refreshing.";
+    <script>
+  function validateForm()
+  {
+  var AR1 =document.forms["rateSentence"]["AR1"].value;
 
-      // //document.getElementById("topic").innerHTML=topic;
-      // document.getElementById("question").innerHTML=question;
-      // document.getElementById("answer").innerHTML=answer;
-      //  document.getElementById("sentence").innerHTML=sentence;
+  if (AR1==null || AR1=="")
+    {
+    alert("Please rate the sentence");
+    return false;
+    }
 
-    </script>
+
+  }
+  </script>
   </body>
 </html>

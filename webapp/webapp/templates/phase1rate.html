@@ -12,7 +12,7 @@
     <p>Please rate the question you just answered and answers from others in the community.</p>
     <p>For reference, we have included the question here:</p>
     <p id="question">{{Question}}</p>
-    <form method="post" action='/decide'> {% csrf_token %} 
+    <form name="rateForm" method="post" action='/decide' onsubmit="return validateForm()" > {% csrf_token %} 
     <div class="box">
 	    <h3>Rate the Question</h3>
       <p>How much do you agree with the following statements about the following question:</p>
@@ -88,23 +88,54 @@
 
     </form>
 
-   
-    <script>
-    //   var topic = "Design a chair for classrooms";
-    //   var question = "What's the color of the chair?";
-    //   var answer1, answer2, answer3; 
+  <script>
+  function validateForm()
+  {
+  var QR1 =document.forms["rateForm"]["QR1"].value;
+  var QR2 =document.forms["rateForm"]["QR2"].value;
+  var QR3 =document.forms["rateForm"]["QR3"].value;
+  var AR1 =document.forms["rateForm"]["AR1"].value;
+  var AR2 =document.forms["rateForm"]["AR2"].value;
+  var AR3 =document.forms["rateForm"]["AR3"].value;
 
-    //   answer1="red, because it's distracting";
-    //   answer2="the color of the chair is not important";
-    //   answer3="blue, because I like blue";
+  if (QR1==null || QR1=="")
+    {
+    alert("Please rate all the questions");
+    return false;
+    }
 
-    //   document.getElementById("topic").innerHTML=topic;
-    //   document.getElementById("question").innerHTML=question;
+  if (QR2==null || QR2=="")
+    {
+    alert("Please rate all the questions");
+    return false;
+    }
 
-    //   document.getElementById("answer1").innerHTML=answer1;
-    //   document.getElementById("answer2").innerHTML=answer2;
-    //   document.getElementById("answer3").innerHTML=answer3;
-      
-    </script>
+  if (QR3==null || QR3=="")
+    {
+    alert("Please rate all the questions");
+    return false;
+    }
+
+  if (AR1==null || AR1=="")
+    {
+    alert("Please rate all the questions");
+    return false;
+    }
+
+  if (AR2==null || AR2=="")
+    {
+    alert("Please rate all the questions");
+    return false;
+    }
+
+  if (AR3==null || AR3=="")
+    {
+    alert("Please rate all the questions");
+    return false;
+    }
+
+  }
+  </script>
+
   </body>
 </html>

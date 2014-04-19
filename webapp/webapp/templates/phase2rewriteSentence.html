@@ -8,18 +8,18 @@
   </head>
   <body>
   <header>
-    <h2>Revise The Sentence</h2>
+    <h2>Rewrite The Sentence</h2>
   </header>
    
     <p>Improve the sentence describing this question and answer.</p>
-   <form method="post">
+   <form name="rewriteSentence" method="post" onsubmit="return validateForm()">
     <div class="box">
     <h3>Rewrite the Sentence Below</h3>
     <p><strong>Question</strong></p>
     <blockquote>{{ question }}</blockquote>
     <p><strong>Answer</strong></p>
     <blockquote>{{ answer }}</blockquote>
-    <textarea type="text" id="sentence" name="answer" placeholder="Please use a complete sentence"></textarea>
+    <textarea type="text" name="answer" placeholder="Please use a complete sentence"></textarea>
     </div>
 
     </div>
@@ -27,15 +27,28 @@
     <input class="submitButton" type="submit" value="Next">
     </form>
 
-    <script>
-      // //var topic = "Design a chair for classrooms";
-      // var question = "What's the color of the chair?";
-      // var answer = "green, because it looks clean and refreshing.";
+   <script>
+function validateForm()
+  {
+  var answer = document.forms["rewriteSentence"]["answer"].value;
+   
+  while(answer.lastIndexOf(" ")>=0){
+    answer = answer.replace(" ","");
+    }
 
-      // //document.getElementById("topic").innerHTML=topic;
-      // document.getElementById("question").innerHTML=question;
-      // document.getElementById("answer").innerHTML=answer;
-      // answer = $("#sentence").val();
-    </script>
+  if ( answer == null || answer =="" || answer.length==0)
+    {
+    alert("Please write the answer");
+    return false;
+    }
+
+  else if(answer.length<=10)
+    {
+    alert("Please write a complete sentence");
+    return false;
+    }
+
+  }
+  </script>
   </body>
 </html>

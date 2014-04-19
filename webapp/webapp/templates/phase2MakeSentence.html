@@ -12,29 +12,44 @@
   </header>
    
     <p class="disclaimer">Please integrate the question and the answer into one independent sentence.</p>
-    <form method="post" action='/rateSentence'> {% csrf_token %}
+    <form name="makeSentence" method="post" action='/rateSentence' onsubmit="return validateForm()"> {% csrf_token %}
     <div class="box">
       <h3>Rephrase in a sentence</h3>
       <p><strong>Question</strong></p>
       <blockquote>{{ question }}</blockquote>
       <p><strong>Answer</strong></p>
       <blockquote>{{ answer }}</blockquote>
-      <textarea type="text" id="sentence" name="answer" placeholder="Please use a complete sentence."></textarea>
+      <textarea type="text"  name="answer" placeholder="Please use a complete sentence."></textarea>
     </div>
-   <input class="submitButton" type="submit" value="Next">
+    
    <p class="disclaimer">Check your sentence. The quality of your work will influence the payment you receive.</p>
     
     <input class="submitButton" type="submit" value="Next" onclick="location.href='phase2rateSentence.html'">
     </form>
-    <script>
-      // //var topic = "Design a chair for classrooms";
-      // var question = "What's the color of the chair?";
-      // var answer = "green, because it looks clean and refreshing.";
+    
 
-      // //document.getElementById("topic").innerHTML=topic;
-      // document.getElementById("question").innerHTML=question;
-      // document.getElementById("answer").innerHTML=answer;
-      // answer = $("#sentence").val();
-    </script>
+  <script>
+  function validateForm()
+  {
+  var answer = document.forms["makeSentence"]["answer"].value;
+   
+  while(answer.lastIndexOf(" ")>=0){
+    answer = answer.replace(" ","");
+    }
+
+  if ( answer == null || answer =="" || answer.length==0)
+    {
+    alert("Please write the sentence");
+    return false;
+    }
+
+  else if(answer.length<=10)
+    {
+    alert("Please write a complete sentence");
+    return false;
+    }
+
+  }
+  </script>
   </body>
 </html>

@@ -21,13 +21,41 @@
   <p>You recently answered:</p>
   <blockquote>{{ question }}</blockquote>
   <p>Think about this question and consider how you could make it deeper. Fill in your suggestion below</p>
-  <form method="post"> {% csrf_token %}
+
+  <form name="askQuestion" method="post" onsubmit="return validateForm()"> {% csrf_token %}
     <div class="box">
     <h3>Ask a deeper question</h3>
     <textarea type="text" name="answer" placeholder="Please write thoughtfully."></textarea>
     </div>
+
     <p class="disclaimer">NOTE: The quality of your submissions influence your payment and bonuses you earn.</p>
     <input class="submitButton" type="submit" value="Submit" >
-    </form>
+    
+  </form>
+
+<script>
+  function validateForm()
+  {
+  var answer = document.forms["askQuestion"]["answer"].value;
+   
+  while(answer.lastIndexOf(" ")>=0){
+    answer = answer.replace(" ","");
+    }
+
+  if ( answer == null || answer =="" || answer.length==0)
+    {
+    alert("Please write the question");
+    return false;
+    }
+
+  else if(answer.length<=10)
+    {
+    alert("Please write a complete sentence");
+    return false;
+    }
+
+  }
+</script>
+
   </body>
 </html>
