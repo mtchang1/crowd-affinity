@@ -1,140 +1,116 @@
 <!-- <!DOCTYPE html> -->
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Rate Questions and Answers</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-  <header>
-	  <h2>Rate Questions and Answers</h2>
-  </header>
-    <p>Please rate the question you just answered and answers from others in the community.</p>
-    <p>For reference, we have included the question here:</p>
-    <p id="question">{{Question}}</p>
-    <form name="rateForm" method="post" action='/decide' onsubmit="return validateForm()" > {% csrf_token %} 
-    <div class="box">
-	    <h3>Rate the Question</h3>
-      <p>How much do you agree with the following statements about the following question:</p>
-      <blockquote>{{ question }}</blockquote>
-      <table>
-        <tr id="headerRow">
-          <td class="questionColm"><strong></strong></td>
-          <td class="ratingColm"><strong>Strongly Agree</strong></td>
-          <td class="ratingColm"><strong>Somewhat Agree</strong></td>
-          <td class="ratingColm"><strong>Somewhat Disagree</strong></td>
-          <td class="ratingColm"><strong>Strongly Disagree</strong></td>
-        </tr>
-        <tr class="questionRow">
-          <td class="questionColm">The question is relevant to <span >{{ topic }}</span></td>
-          <td><input type="radio" name="QR1" value="0"></td>
-          <td><input type="radio" name="QR1" value="1"></td>
-          <td><input type="radio" name="QR1" value="2"></td>
-          <td><input type="radio" name="QR1" value="3"></td>
-        </tr>
-        <tr class="questionRow">
-          <td class="questionColm">The question is clear and consice</td>
-          <td><input type="radio" name="QR2" value="0"></td>
-          <td><input type="radio" name="QR2" value="1"></td>
-          <td><input type="radio" name="QR2" value="2"></td>
-          <td><input type="radio" name="QR2" value="3"></td>
-        </tr>
-        <tr class="questionRow">
-          <td class="questionColm">The question is worth to generate many answers</td>
-          <td><input type="radio" name="QR3" value="0"></td>
-          <td><input type="radio" name="QR3" value="1"></td>
-          <td><input type="radio" name="QR3" value="2"></td>
-          <td><input type="radio" name="QR3" value="3"></td>
-        </tr>
-      </table>
-	    </div>
-      <div class="box">
-      <h3>Rate other's Answers</h3>
-      <p>How good is each answer to the following question:</p>
-      <blockquote>{{ question }}</blockquote>
-      <table>
-        <tr id="headerRow">
-          <td class="questionColm"><strong></strong></td>
-          <td class="ratingColm"><strong>Very Poor</strong></td>
-          <td class="ratingColm"><strong>Somewhat Poor</strong></td>
-          <td class="ratingColm"><strong>Somewhat Good</strong></td>
-          <td class="ratingColm"><strong>Very Good</strong></td>
-        </tr>
-        <tr class="questionRow">
-          <td class="questionColm" id="answer1">{{ answer.1 }}</td>
-          <td><input type="radio" name="AR1" value="0"></td>
-          <td><input type="radio" name="AR1" value="1"></td>
-          <td><input type="radio" name="AR1" value="2"></td>
-          <td><input type="radio" name="AR1" value="3"></td>
-        </tr>
-        <tr class="questionRow">
-          <td class="questionColm" id="answer2">{{ answer.2 }}</td>
-          <td><input type="radio" name="AR2" value="0"></td>
-          <td><input type="radio" name="AR2" value="1"></td>
-          <td><input type="radio" name="AR2" value="2"></td>
-          <td><input type="radio" name="AR2" value="3"></td>
-        </tr>
-        <tr class="questionRow">
-          <td class="questionColm" id="answer3">{{ answer.3 }}</td>
-          <td><input type="radio" name="AR3" value="0"></td>
-          <td><input type="radio" name="AR3" value="1"></td>
-          <td><input type="radio" name="AR3" value="2"></td>
-          <td><input type="radio" name="AR3" value="3"></td>
-        </tr>
-      </table>
-      </div>
-    <p class="disclaimer">The quality of your submissions influence your payment and bonuses you earn. Please answer carefully.</p>
-     <input class="submitButton" type="submit" value="Next" >
-    </form>
-  <!-- TODO: fix script 
-  <script>
-  function validateForm()
-  {
-  var QR1 =document.forms["rateForm"]["QR1"].value;
-  var QR2 =document.forms["rateForm"]["QR2"].value;
-  var QR3 =document.forms["rateForm"]["QR3"].value;
-  var AR1 =document.forms["rateForm"]["AR1"].value;
-  var AR2 =document.forms["rateForm"]["AR2"].value;
-  var AR3 =document.forms["rateForm"]["AR3"].value;
+    <head>
+        <meta charset="utf-8">
+        <title>Rate Questions and Answers</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+        <h2>Rate Questions and Answers</h2>
+        </header>
+        <p>Please rate the question you just answered and answers from others in the community.</p>
+        <p>For reference, we have included the question here:</p>
+        <p id="question">{{Question}}</p>
+        <form name="rateForm" method="post" action='/decide' onsubmit="return validateForm()" > {% csrf_token %} 
+            <div class="box">
+                <h3>Rate the Question</h3>
+                <p>How much do you agree with the following statements about the following question:</p>
+                <blockquote>{{ question }}</blockquote>
+                <table>
+                    <tr id="headerRow">
+                        <td class="questionColm"><strong></strong></td>
+                        <td class="ratingColm"><strong>Strongly Agree</strong></td>
+                        <td class="ratingColm"><strong>Somewhat Agree</strong></td>
+                        <td class="ratingColm"><strong>Somewhat Disagree</strong></td>
+                        <td class="ratingColm"><strong>Strongly Disagree</strong></td>
+                    </tr>
+                    <tr class="questionRow">
+                        <td class="questionColm">The question is relevant to <span >{{ topic }}</span></td>
+                        <td><input type="radio" name="QR1" value="0"></td>
+                        <td><input type="radio" name="QR1" value="1"></td>
+                        <td><input type="radio" name="QR1" value="2"></td>
+                        <td><input type="radio" name="QR1" value="3"></td>
+                    </tr>
+                    <tr class="questionRow">
+                        <td class="questionColm">The question is clear and consice</td>
+                        <td><input type="radio" name="QR2" value="0"></td>
+                        <td><input type="radio" name="QR2" value="1"></td>
+                        <td><input type="radio" name="QR2" value="2"></td>
+                        <td><input type="radio" name="QR2" value="3"></td>
+                    </tr>
+                    <tr class="questionRow">
+                        <td class="questionColm">The question is worth to generate many answers</td>
+                        <td><input type="radio" name="QR3" value="0"></td>
+                        <td><input type="radio" name="QR3" value="1"></td>
+                        <td><input type="radio" name="QR3" value="2"></td>
+                        <td><input type="radio" name="QR3" value="3"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="box">
+                <h3>Rate other's Answers</h3>
+                <p>How good is each answer to the following question:</p>
+                <blockquote>{{ question }}</blockquote>
+                <table>
+                    <tr id="headerRow">
+                        <td class="questionColm"><strong></strong></td>
+                        <td class="ratingColm"><strong>Very Poor</strong></td>
+                        <td class="ratingColm"><strong>Somewhat Poor</strong></td>
+                        <td class="ratingColm"><strong>Somewhat Good</strong></td>
+                        <td class="ratingColm"><strong>Very Good</strong></td>
+                    </tr>
+                    <tr class="questionRow">
+                        <td class="questionColm" id="answer1">{{ answer.1 }}</td>
+                        <td><input type="radio" name="AR1" value="0"></td>
+                        <td><input type="radio" name="AR1" value="1"></td>
+                        <td><input type="radio" name="AR1" value="2"></td>
+                        <td><input type="radio" name="AR1" value="3"></td>
+                    </tr>
+                    <tr class="questionRow">
+                        <td class="questionColm" id="answer2">{{ answer.2 }}</td>
+                        <td><input type="radio" name="AR2" value="0"></td>
+                        <td><input type="radio" name="AR2" value="1"></td>
+                        <td><input type="radio" name="AR2" value="2"></td>
+                        <td><input type="radio" name="AR2" value="3"></td>
+                    </tr>
+                    <tr class="questionRow">
+                        <td class="questionColm" id="answer3">{{ answer.3 }}</td>
+                        <td><input type="radio" name="AR3" value="0"></td>
+                        <td><input type="radio" name="AR3" value="1"></td>
+                        <td><input type="radio" name="AR3" value="2"></td>
+                        <td><input type="radio" name="AR3" value="3"></td>
+                    </tr>
+                </table>
+            </div>
+            <p class="disclaimer">The quality of your submissions influence your payment and bonuses you earn. Please answer carefully.</p>
+            <input class="submitButton" type="submit" value="Next" >
+        </form>
 
-  if (QR1==null || QR1=="")
-    {
-    alert("Please rate all the questions");
-    return false;
-    }
+        <script> 
+            function validateForm()
+            {
+                var input_set = ["QR1", "QR2", "QR3", "AR1", "AR2", "AR3"]
 
-  if (QR2==null || QR2=="")
-    {
-    alert("Please rate all the questions");
-    return false;
-    }
+                for i in input_set {
+                    var inputs = document.getElementsByName(i);
+                    var checked = false;
+                    for (var i = 0; i < inputs.length; i++) {
+                        if (inputs[i].checked) {
+                            checked = true
+                            break;;
+                        }
+                    }
 
-  if (QR3==null || QR3=="")
-    {
-    alert("Please rate all the questions");
-    return false;
-    }
+                    if (checked)
+                    {
+                        alert("Please rate all the questions");
+                        return false;
+                    }
+                }
+               return true;
+            }
+        </script>
 
-  if (AR1==null || AR1=="")
-    {
-    alert("Please rate all the questions");
-    return false;
-    }
-
-  if (AR2==null || AR2=="")
-    {
-    alert("Please rate all the questions");
-    return false;
-    }
-
-  if (AR3==null || AR3=="")
-    {
-    alert("Please rate all the questions");
-    return false;
-    }
-
-    }
-  </script>
-  -->
-  </body>
+    </body>
 </html>
