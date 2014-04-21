@@ -3,28 +3,28 @@
   <head>
     <meta charset="utf-8">
     <title>You finished</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/static/style.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   </head>
   <body>
   <header>
 	  <h2>Congrats, you finished all the tasks!</h2>
   </header>
-  <form method="post"> 
-    
+  <form method="post">
+
     <p class="disclaimer">Please copy the code below and paste back to the Mechanical Turk page. By doing so, we can connect your Turk ID with what you did.</p>
 
-    <p>Your code: {{user_id}} </p> 
-    
-   
+    <p>Your code: {{user_id}} </p>
+
+
 
     <input class="submitButton" type="submit" value="Submit" >
   </form>
- 
+
   <!--<script>
       var topic = "Design a chair for classrooms";
       var question = "What's the color of the chair?";
-      var answer; 
+      var answer;
 
       document.getElementById("topic").innerHTML=topic;
       document.getElementById("question").innerHTML=question;

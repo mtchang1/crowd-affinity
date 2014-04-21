@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Questions about {{ topic }}</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/static/style.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   </head>
   <body>
@@ -14,8 +14,8 @@
     <h3>Congrats!</h3>
     <p>You've already finished {{rem_task_number}} tasks. There are still {{task_number}} tasks left. </p>
     </div>
-    <p class="disclaimer">The quality of your answers and questions will influence the payment you receive, so please choose "I don't know" to skip to the next question if you're not familiar with this particular topic.</p> 
-  
+    <p class="disclaimer">The quality of your answers and questions will influence the payment you receive, so please choose "I don't know" to skip to the next question if you're not familiar with this particular topic.</p>
+
     <form action="/answerQuestion" method="get">
         <input type="submit" value="Next Task">
     </form>

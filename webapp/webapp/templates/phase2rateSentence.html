@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <title>Rate The Sentence</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/static/style.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   </head>
   <body>
   <header>
 	  <h2>Rate the Sentence</h2>
   </header>
-   
+
     <p>Please indicate how well the sentence describes the question and answer.</p>
     <form name = "rateSentence" method="post" onsubmit="return validateForm()"> {% csrf_token %}
     <div class="box">
@@ -37,7 +37,7 @@
       </table>
     </div>
     <input class="submitButton" type="submit" value="Next">
-   
+
     </form>
     <script>
   function validateForm()
