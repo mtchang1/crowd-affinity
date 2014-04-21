@@ -1,61 +1,62 @@
 <!-- <!DOCTYPE html> -->
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Ask a new question about {{ topic }}</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-  <header>
-	  <h2>Ask a new question about {{ topic }}</h2>
-  </header>
-  <p>In this task, you will ask a deeper question, related to the one you just answered. There's an example below.</p>
-  <div class="box">
-    <h3>Example new question</h3>
-    <p><strong>Original question:</strong></p>
-    <blockquote>What elements a cabin for vacation needs to have?</blockquote>
-    <p><strong>A deeper question:</strong></p>
-    <blockquote>What makes a cabin comfy?</blockquote>
-  </div>
+    <head>
+        <meta charset="utf-8">
+        <title>Ask a new question about {{ topic }}</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+        <h2>Ask a new question about {{ topic }}</h2>
+        </header>
+        <p>In this task, you will ask a deeper question, related to the one you just answered. There's an example below.</p>
+        <div class="box">
+            <h3>Example new question</h3>
+            <p><strong>Original question:</strong></p>
+            <blockquote>What elements a cabin for vacation needs to have?</blockquote>
+            <p><strong>A deeper question:</strong></p>
+            <blockquote>What makes a cabin comfy?</blockquote>
+        </div>
 
-  <p>You recently answered:</p>
-  <blockquote>{{ question }}</blockquote>
-  <p>Think about this question and consider how you could make it deeper. Fill in your suggestion below</p>
+        <p>You recently answered:</p>
+        <blockquote>{{ question }}</blockquote>
+        <p>Think about this question and consider how you could make it deeper. Fill in your suggestion below</p>
 
-  <form name="askQuestion" method="post" onsubmit="return validateForm()"> {% csrf_token %}
-    <div class="box">
-    <h3>Ask a deeper question</h3>
-    <textarea type="text" name="answer" placeholder="Please write thoughtfully."></textarea>
-    </div>
+        <form name="askQuestion" method="post" onsubmit="return validateForm()" action="/linking"> {% csrf_token %}
+            <div class="box">
+                <h3>Ask a deeper question</h3>
+                <textarea type="text" name="answer" placeholder="Please write thoughtfully."></textarea>
+            </div>
 
-    <p class="disclaimer">NOTE: The quality of your submissions influence your payment and bonuses you earn.</p>
-    <input class="submitButton" type="submit" value="Submit" >
-    
-  </form>
+            <p class="disclaimer">NOTE: The quality of your submissions influence your payment and bonuses you earn.</p>
+            <input class="submitButton" type="submit" value="Submit" >
 
-<script>
-  function validateForm()
-  {
-  var answer = document.forms["askQuestion"]["answer"].value;
-   
-  while(answer.lastIndexOf(" ")>=0){
-    answer = answer.replace(" ","");
-    }
+        </form>
 
-  if ( answer == null || answer =="" || answer.length==0)
-    {
-    alert("Please write the question");
-    return false;
-    }
 
-  else if(answer.length<=10)
-    {
-    alert("Please write a complete sentence");
-    return false;
-    }
+        <script>
+            function validateForm()
+            {
+                var answer = document.forms["askQuestion"]["answer"].value;
 
-  }
-</script>
+                while(answer.lastIndexOf(" ")>=0){
+                    answer = answer.replace(" ","");
+                }
 
-  </body>
+                if ( answer == null || answer =="" || answer.length==0)
+                {
+                    alert("Please write the question");
+                    return false;
+                }
+
+                else if(answer.length<=10)
+                {
+                    alert("Please write a complete sentence");
+                    return false;
+                }
+                return true;
+            }
+        </script>
+
+    </body>
 </html>

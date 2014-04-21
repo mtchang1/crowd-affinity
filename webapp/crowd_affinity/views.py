@@ -8,6 +8,7 @@ import os.path
 import random
 
 def start1(request):
+    #user = User.objects.create_user(username=Worker().id, "")
     return render(request, 'phase1start.html')
 
 def answerQuestion(request):
@@ -47,7 +48,7 @@ def askQuestion(request):
         answer = Question(question_text=text, parent_id=parent, user_id=user)
         answer.save()
 
-        return render(request, 'phase1answerQuestion.html')
+        return checkTasks(request)
     else: 
         return render(request, 'phase1askQuestion.html')
 
@@ -57,11 +58,26 @@ def rate(request):
 
 def decide(request):
     #TODO: find remaining number of tasks for user
-    r = 0;
+    r = 5;
     template_values = {'remaining':r}
-    return render(request, 'phase1decideWhatsNext.html', template_values)
+    if r > 0:
+        return render(request, 'phase1decideWhatsNext.html', template_values)
+    else:
+        return render(request, 'phase1finish.html')
+
+def linking(request):
+    #TODO: find remaining number of tasks for user
+    r = 5;
+    template_values = {'task_number':r, 'rem_task_number':5-r}
+    if r > 0:
+        return render(request, 'phase1linkingpage.html', template_values)
+    else:
+        return render(request, 'phase1finish.html')
 
 
+
+
+#phase 2
 def start2(request):
     return render(request, 'phase2start.html')
 
