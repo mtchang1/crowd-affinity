@@ -16,6 +16,8 @@ class Answer(models.Model):
     question = models.ForeignKey('Question')
     answer_text = models.CharField(max_length=500)
     user_id = models.CharField(max_length=50)
+    rating = models.IntegerField(default=0)
+    num_ratings = models.IntegerField(default=0)
 
     def __unicode__(self):
         return '(' + str(self.id) + ', ' + self.answer_text + ')'
@@ -35,3 +37,10 @@ class Tag(models.Model):
 
     def __unicode__(self):
         return self.tag
+
+class Worker(models.Model):
+    current_question = models.ForeignKey('Question')
+    tasks = models.IntegerField(default=5)
+
+    def __unicode__(self):
+        return self.id
