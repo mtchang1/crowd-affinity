@@ -78,23 +78,25 @@ def rate(request):
     return render(request, 'phase1rate.html')
 
 def decide(request):
-    w = Worker.objects.get(id=request.get.username)
-    r = w.tasks
+    #w = Worker.objects.get(id=request.get.username)
+    #r = w.tasks
+    r = 5;
 
     template_values = {'remaining':r}
     if r > 0:
-        w.tasks = r-1
+        #w.tasks = r-1
         return render(request, 'phase1decideWhatsNext.html', template_values)
     else:
         return render(request, 'phase1finish.html')
 
 def linking(request):
-    w = Worker.objects.get(id=user.get_username())
-    r = w.tasks
+    #w = Worker.objects.get(id=user.get_username())
+    #r = w.tasks
+    r = 5; 
     
     template_values = {'task_number':r, 'rem_task_number':5-r}
     if r > 0:
-        w.tasks = r-1
+        #w.tasks = r-1
         return render(request, 'phase1linkingpage.html', template_values)
     else:
         return render(request, 'phase1finish.html')
