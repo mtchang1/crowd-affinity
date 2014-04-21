@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title>Ask a new question about {{ topic }}</title>
         <link rel="stylesheet" href="/static/css/style.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     </head>
     <body>
         <header>
@@ -25,37 +26,46 @@
         <form name="askQuestion" method="post" onsubmit="return validateForm()" action="/linking"> {% csrf_token %}
             <div class="box">
                 <h3>Ask a deeper question</h3>
-                <textarea type="text" name="answer" placeholder="Please write thoughtfully."></textarea>
+                <textarea type="text" name="answer" id="answer3" placeholder="Please write thoughtfully."></textarea>
             </div>
 
             <p class="disclaimer">NOTE: The quality of your submissions influence your payment and bonuses you earn.</p>
-            <input class="submitButton" type="submit" value="Submit" >
+            <input class="submitButton" type="submit" value="Submit"  id="sumbit" disabled="disabled">
 
         </form>
 
 
         <script>
-            function validateForm()
-            {
-                var answer = document.forms["askQuestion"]["answer"].value;
 
-                while(answer.lastIndexOf(" ")>=0){
-                    answer = answer.replace(" ","");
-                }
+        $(function() {
+        $("#answer3").bind("keyup", validateForm);
+        });
+         
 
-                if ( answer == null || answer =="" || answer.length==0)
-                {
-                    alert("Please write the question");
-                    return false;
-                }
 
-                else if(answer.length<=10)
-                {
-                    alert("Please write a complete sentence");
-                    return false;
-                }
-                return true;
+        function validateForm()
+          {
+            //alert("keyup!");
+          var answer = document.forms["askQuestion"]["answer"].value;
+
+          while(answer.lastIndexOf(" ")>=0){
+            answer = answer.replace(" ","");
             }
+
+          if ( answer == null || answer =="" || answer.length<=5)
+            {
+           // alert("Please write the answer");
+           $("form").find("input[type*='submit']").attr("disabled", "disabled").removeClass('enabled').addClass('disabled');
+            
+            return false;
+            }
+
+          else {
+             $("form").find("input[type*='submit']").removeAttr("disabled").removeClass('disabled').addClass('enabled');
+             return true;
+          }
+        }
+
         </script>
 
     </body>

@@ -21,24 +21,37 @@
     </div>
     <p class="disclaimer">Please check your tags. The quality of your work will influence the payment you receive. </p>
 
-    <input class="submitButton" type="submit" value="Submit">
+    <input class="submitButton" type="submit" value="Submit" disabled="disabled">
     </form>
 <script>
-function validateForm()
-  {
-  var answer = document.forms["tagSentence"]["tags"].value;
 
-  while(answer.lastIndexOf(" ")>=0){
-    answer = answer.replace(" ","");
-    }
+  $(function() {
+  $("#tags").bind("keyup", validateForm);
+  });  
 
-  if ( answer == null || answer =="" || answer.length==0)
-    {
-    alert("Please write the answer");
-    return false;
-    }
+  function validateForm()
+          {
+            //alert("keyup!");
+          var answer = document.forms["tagSentence"]["tags"].value;
 
+          while(answer.lastIndexOf(" ")>=0){
+            answer = answer.replace(" ","");
+            }
+
+          if ( answer == null || answer =="" || answer.length<=3)
+            {
+           // alert("Please write the answer");
+           $("form").find("input[type*='submit']").attr("disabled", "disabled").removeClass('enabled').addClass('disabled');
+            
+            return false;
+            }
+
+          else {
+             $("form").find("input[type*='submit']").removeAttr("disabled").removeClass('disabled').addClass('enabled');
+             return true;
+          }
   }
+
   </script>
 
   </body>
