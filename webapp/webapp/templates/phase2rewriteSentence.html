@@ -19,35 +19,43 @@
     <blockquote>{{ question }}</blockquote>
     <p><strong>Answer</strong></p>
     <blockquote>{{ answer }}</blockquote>
-    <textarea type="text" name="answer" placeholder="Please use a complete sentence"></textarea>
+    <textarea type="text" name="answer" id="answer5" placeholder="Please use a complete sentence"></textarea>
     </div>
 
     </div>
 
-    <input class="submitButton" type="submit" value="Next">
+    <input class="submitButton" type="submit" value="Next" disabled="disabled">
     </form>
 
    <script>
-function validateForm()
-  {
-  var answer = document.forms["rewriteSentence"]["answer"].value;
 
-  while(answer.lastIndexOf(" ")>=0){
-    answer = answer.replace(" ","");
-    }
 
-  if ( answer == null || answer =="" || answer.length==0)
-    {
-    alert("Please write the answer");
-    return false;
-    }
+  $(function() {
+  $("#answer5").bind("keyup", validateForm);
+  });
+         
 
-  else if(answer.length<=10)
-    {
-    alert("Please write a complete sentence");
-    return false;
-    }
+  function validateForm()
+          {
+            //alert("keyup!");
+          var answer = document.forms["rewriteSentence"]["answer"].value;
 
+          while(answer.lastIndexOf(" ")>=0){
+            answer = answer.replace(" ","");
+            }
+
+          if ( answer == null || answer =="" || answer.length<=5)
+            {
+           // alert("Please write the answer");
+           $("form").find("input[type*='submit']").attr("disabled", "disabled").removeClass('enabled').addClass('disabled');
+            
+            return false;
+            }
+
+          else {
+             $("form").find("input[type*='submit']").removeAttr("disabled").removeClass('disabled').addClass('enabled');
+             return true;
+          }
   }
   </script>
   </body>

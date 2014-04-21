@@ -16,44 +16,49 @@
 
     <div class="box">
         <h3 id="question"> {{ question }} </h3>
-        <textarea type="text" name="answer" placeholder="Please use a complete sentence."></textarea>
+        <textarea type="text" name="answer" id="answer2" placeholder="Please use a complete sentence."></textarea>
     </div>
 
-    <input class="submitButton" type="submit" value="Next" id="sumbit" >
-     <input class="submitButton" type="submit" value="I don't know" id="dont_no" onclick="location.href='rate'">
+    <input class="submitButton" type="submit" value="Next" id="sumbit" disabled="disabled">
+     <input class="submitButton" type="submit" value="I don't know" id="dont_no"  disabled="disabled" onclick="location.href='rate'">
   </form>
 
 <<<<<<< HEAD
  
  
 =======
-  <input class="submitButton" type="submit" value="I don't know" onclick="location.href='rate'">
 
 >>>>>>> FETCH_HEAD
  <script>
+
+$(function() {
+        $("#answer2").bind("keyup", validateForm);
+});
+ 
+
+
 function validateForm()
   {
+    //alert("keyup!");
   var answer = document.forms["answerQuestion"]["answer"].value;
 
   while(answer.lastIndexOf(" ")>=0){
     answer = answer.replace(" ","");
     }
 
-  if ( answer == null || answer =="" || answer.length==0)
+  if ( answer == null || answer =="" || answer.length<=5)
     {
-    alert("Please write the answer");
-    document.getElementById("submit").disabled=true;
-    document.getElementById("dont_no").disabled=true;
+   // alert("Please write the answer");
+   $("form").find("input[type*='submit']").attr("disabled", "disabled").removeClass('enabled').addClass('disabled');
+    
     return false;
     }
 
-  else if(answer.length<=10)
-    {
-    alert("Please write a complete sentence");
-    return false;
-    }
-    return true;
+  else {
+     $("form").find("input[type*='submit']").removeAttr("disabled").removeClass('disabled').addClass('enabled');
+     return true;
   }
+}
   </script>
 
   <style>

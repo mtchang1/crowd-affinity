@@ -36,22 +36,49 @@
         </tr>
       </table>
     </div>
-    <input class="submitButton" type="submit" value="Next">
+    <input class="submitButton" type="submit" value="Next" disabled="disabled">
 
-    </form>
-    <script>
-  function validateForm()
-  {
-  var AR1 =document.forms["rateSentence"]["AR1"].value;
+ </form> 
+ <script>
 
-  if (AR1==null || AR1=="")
-    {
-    alert("Please rate the sentence");
-    return false;
-    }
+ $(document).ready(function(){
+  
+  var allchecked = 1;
 
 
-  }
+  $("form").mouseup(function(){
+    //alert($('input[type=radio]:checked').size());
+    allchecked = 1;
+    $('.questionRow').each(function () {
+        // Question text
+        var question = $(this).prev();
+        // Validate
+        if (!$(this).find('input').is(':checked')) {
+            allchecked = 0;
+        }
+    });
+
+    if(allchecked == 1)
+      $("form").find("input[type*='submit']").removeAttr("disabled").removeClass('disabled').addClass('enabled');
+    else
+      $("form").find("input[type*='submit']").attr("disabled", "disabled").removeClass('enabled').addClass('disabled');
+  
+  });
+ 
+ });
+
+
+  // function validateForm()
+  // {
+  // var AR1 =document.forms["rateSentence"]["AR1"].value;
+
+  // if (AR1==null || AR1=="")
+  //   {
+  //   alert("Please rate the sentence");
+  //   return false;
+  //   }
+
+
   </script>
   </body>
 </html>

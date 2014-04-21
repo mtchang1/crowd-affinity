@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Rate Questions and Answers</title>
     <link rel="stylesheet" href="/static/css/style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   </head>
   <body>
   <header>
@@ -84,44 +85,40 @@
       </table>
       </div>
     <p class="disclaimer">The quality of your submissions influence your payment and bonuses you earn. Please answer carefully.</p>
-     <input class="submitButton" type="submit" value="Next" >
+     <input class="submitButton" type="submit" value="Next" id="submit" disabled="disabled">
     </form>
-  <!-- TODO: fix script
+  
   <script>
-  function validateForm()
-  {
-  var QR1 =document.forms["rateForm"]["QR1"].value;
-  var QR2 =document.forms["rateForm"]["QR2"].value;
-  var QR3 =document.forms["rateForm"]["QR3"].value;
-  var AR1 =document.forms["rateForm"]["AR1"].value;
-  var AR2 =document.forms["rateForm"]["AR2"].value;
-  var AR3 =document.forms["rateForm"]["AR3"].value;
->>>>>>> b762a2556d1b15299b8073986b76bebb1564c19a
 
-        <script> 
-            function validateForm()
-            {
-                var input_set = ["QR1", "QR2", "QR3", "AR1", "AR2", "AR3"]
+$(document).ready(function(){
+  
+  var allchecked = 1;
 
-                for i in input_set {
-                    var inputs = document.getElementsByName(i);
-                    var checked = false;
-                    for (var i = 0; i < inputs.length; i++) {
-                        if (inputs[i].checked) {
-                            checked = true
-                            break;;
-                        }
-                    }
 
-                    if (checked)
-                    {
-                        alert("Please rate all the questions");
-                        return false;
-                    }
-                }
-               return true;
-            }
-        </script>
+  $("form").mouseup(function(){
+    //alert($('input[type=radio]:checked').size());
+    allchecked = 1;
+    $('.questionRow').each(function () {
+        // Question text
+        var question = $(this).prev();
+        // Validate
+        if (!$(this).find('input').is(':checked')) {
+            allchecked = 0;
+        }
+    });
+
+    if(allchecked == 1)
+      $("form").find("input[type*='submit']").removeAttr("disabled").removeClass('disabled').addClass('enabled');
+    else
+      $("form").find("input[type*='submit']").attr("disabled", "disabled").removeClass('enabled').addClass('disabled');
+  
+  });
+ 
+ });
+
+ 
+
+  </script>
 
     </body>
 </html>
