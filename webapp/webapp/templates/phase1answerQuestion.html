@@ -19,10 +19,11 @@
         <textarea type="text" name="answer" placeholder="Please use a complete sentence."></textarea>
     </div>
 
-    <input class="submitButton" type="submit" value="Next" >
+    <input class="submitButton" type="submit" value="Next" id="sumbit" >
+     <input class="submitButton" type="submit" value="I don't know" id="dont_no" onclick="location.href='rate'">
   </form>
 
-  <input class="submitButton" type="submit" value="I don't know" onclick="location.href='rate'">
+ 
  
  <script>
 function validateForm()
@@ -36,6 +37,8 @@ function validateForm()
   if ( answer == null || answer =="" || answer.length==0)
     {
     alert("Please write the answer");
+    document.getElementById("submit").disabled=true;
+    document.getElementById("dont_no").disabled=true;
     return false;
     }
 
@@ -47,5 +50,10 @@ function validateForm()
 
   }
   </script>
+
+  <style>
+
+
+  </style>
   </body>
 </html>
