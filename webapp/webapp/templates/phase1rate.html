@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Rate Questions and Answers</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/static/style.css">
   </head>
   <body>
   <header>
@@ -12,7 +12,7 @@
     <p>Please rate the question you just answered and answers from others in the community.</p>
     <p>For reference, we have included the question here:</p>
     <p id="question">{{Question}}</p>
-    <form name="rateForm" method="post" action='/decide' onsubmit="return validateForm()" > {% csrf_token %} 
+    <form name="rateForm" method="post" action='/decide' onsubmit="return validateForm()" > {% csrf_token %}
     <div class="box">
 	    <h3>Rate the Question</h3>
       <p>How much do you agree with the following statements about the following question:</p>
@@ -86,7 +86,7 @@
     <p class="disclaimer">The quality of your submissions influence your payment and bonuses you earn. Please answer carefully.</p>
      <input class="submitButton" type="submit" value="Next" >
     </form>
-  <!-- TODO: fix script 
+  <!-- TODO: fix script
   <script>
   function validateForm()
   {
