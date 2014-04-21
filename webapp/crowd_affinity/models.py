@@ -5,7 +5,9 @@ class Question(models.Model):
     question_text = models.CharField(max_length=200)
     user_id = models.CharField(max_length=50)
     parent = models.ForeignKey('self')
-    rating = models.IntegerField(default=0)
+    rating_rel = models.IntegerField(default=0)
+    rating_clear = models.IntegerField(default=0)
+    rating_many = models.IntegerField(default=0)
     num_ratings = models.IntegerField(default=0)
     designer = models.BooleanField(default=False)
 
@@ -43,4 +45,4 @@ class Worker(models.Model):
     tasks = models.IntegerField(default=5)
 
     def __unicode__(self):
-        return self.id
+        return str(self.id)

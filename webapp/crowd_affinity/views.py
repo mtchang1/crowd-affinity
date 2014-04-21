@@ -1,7 +1,7 @@
 # Create your views here.
 from django.shortcuts import render
 from django.contrib import auth
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
@@ -10,30 +10,34 @@ import os.path
 import random
 
 def start1(request):
-    #worker = User.objects.create_user(str(Worker().id), "")
-    #user = authenticate(worker.id, "")
-    #if user is not None:
-    #   if user.is_active:
-    #      login(request, user)
-    #     return render(request, 'phase1start.html')
-    
-    return render(request, 'phase1start.html')
+    logout(request)
+    if request.method == "POST":
+        w = Worker(current_question_id=0)
+        w.save()
+        worker = User.objects.create_user(username=w.id, email=None, password="cp")
+        user = authenticate(username=w.id, password="cp")
+        if user is not None:
+            login(request, user)
+            return answerQuestion(request)
+        else:
+            return render(request, 'phase1rate.html')
+    else:
+        return render(request, 'phase1start.html')
 
 def answerQuestion(request): 
-    #w = Worker.objects.get(id=request.user.username)
+    w = Worker.objects.get(id=request.user.username)
 
     if request.method == "POST": 
+        q_id = w.current_question
         if request.POST.get('answer'):
             text = request.POST.get('answer')
 
-            #u_id = request.user.username; 
-            u_id = 0; #dummy
-            q_id = 0;
-            answer = Answer(question_id=q_id, answer_text=text, user_id=u_id)
+            answer = Answer(question_id=q_id, answer_text=text, user_id=w_id)
             answer.save()
 
             return render(request, 'phase1rate.html')
         else:
+            q_text = Question.objects.get(id=q_id).question_text
             return render(request, 'phase1answerQuestion.html', {'question':q_text})
     else: 
         #default vars
@@ -46,7 +50,7 @@ def answerQuestion(request):
         q_id = q.id
         q_text = q.question_text
 
-        #w.current_question = q_id
+        w.current_question = q_id
 
         return render(request, 'phase1answerQuestion.html', {'question':q_text})
 
@@ -66,6 +70,8 @@ def askQuestion(request):
         return render(request, 'phase1askQuestion.html')
 
 def rate(request):
+    w = Worker.objects.get(id=request.user.username)
+
     if request.POST.get('rateForm'):
         #do something
         if Answer.objects.count() > 0:
@@ -75,33 +81,36 @@ def rate(request):
             q_text = q.question_text
 
         return render(request, 'phase1rate.html')
-    return render(request, 'phase1rate.html')
+    else: 
+        return render(request, 'phase1rate.html')
 
 def decide(request):
-    #w = Worker.objects.get(id=request.get.username)
-    #r = w.tasks
+    w = Worker.objects.get(id=request.user.username)
+    r = w.tasks
     r = 5;
 
     template_values = {'remaining':r}
     if r > 0:
-        #w.tasks = r-1
+        w.tasks = r-1
         return render(request, 'phase1decideWhatsNext.html', template_values)
     else:
-        return render(request, 'phase1finish.html')
+        return finish(request)
 
 def linking(request):
-    #w = Worker.objects.get(id=user.get_username())
-    #r = w.tasks
+    w = Worker.objects.get(id=request.user.username)
+    r = w.tasks
     r = 5; 
     
     template_values = {'task_number':r, 'rem_task_number':5-r}
     if r > 0:
-        #w.tasks = r-1
+        w.tasks = r-1
         return render(request, 'phase1linkingpage.html', template_values)
     else:
-        return render(request, 'phase1finish.html')
+        return finish(request)
 
-
+def finish(request):
+    logout();
+    return render(request, 'phase1finish.html')
 
 
 #phase 2
