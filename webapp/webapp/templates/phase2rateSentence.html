@@ -43,22 +43,25 @@
 
  $(document).ready(function(){
   
-  var allchecked = 1;
+ 
+  var allchecked = 0;
 
 
   $("form").mouseup(function(){
+    //console.log($('input[type=radio]:checked').size());
     //alert($('input[type=radio]:checked').size());
-    allchecked = 1;
+    allchecked = 0;
     $('.questionRow').each(function () {
         // Question text
         var question = $(this).prev();
+       
         // Validate
-        if (!$(this).find('input').is(':checked')) {
-            allchecked = 0;
+        if ($(this).find('input').is(':checked')) {
+            allchecked++;
         }
     });
-
-    if(allchecked == 1)
+    console.log(allchecked);
+    if(allchecked >= 0)
       $("form").find("input[type*='submit']").removeAttr("disabled").removeClass('disabled').addClass('enabled');
     else
       $("form").find("input[type*='submit']").attr("disabled", "disabled").removeClass('enabled').addClass('disabled');
@@ -67,16 +70,6 @@
  
  });
 
-
-  // function validateForm()
-  // {
-  // var AR1 =document.forms["rateSentence"]["AR1"].value;
-
-  // if (AR1==null || AR1=="")
-  //   {
-  //   alert("Please rate the sentence");
-  //   return false;
-  //   }
 
 
   </script>

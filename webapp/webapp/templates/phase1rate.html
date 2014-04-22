@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Rate Questions and Answers</title>
+    <title>Rate Questions{% if answers %} and Answers{% endif %}</title>
     <link rel="stylesheet" href="/static/css/style.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   </head>
   <body>
   <header>
-	  <h2>Rate Questions and Answers</h2>
+	  <h2>Rate Questions{% if answers %} and Answers{% endif %}</h2>
   </header>
   <p> user id = {{ user_id }} </p>
-  <p>Please rate the question you just answered and answers from others in the community.</p>
+  <p>Please rate the question you just answered{% if answers %} and answers from others in the community{% endif %}.</p>
     <p>For reference, we have included the question here:</p>
     <p id="question">{{Question}}</p>
     <form name="rateForm" method="post" action='/decide' onsubmit="return validateForm()" > {% csrf_token %}
@@ -50,6 +50,7 @@
         </tr>
       </table>
 	    </div>
+      {% if answer %}
       <div class="box">
       <h3>Rate other's Answers</h3>
       <p>How good is each answer to the following question:</p>
@@ -62,61 +63,52 @@
           <td class="ratingColm"><strong>Somewhat Good</strong></td>
           <td class="ratingColm"><strong>Very Good</strong></td>
         </tr>
-        <tr class="questionRow">
-          <td class="questionColm" id="answer1">{{ answer1 }}</td>
-          <td><input type="radio" name="AR1" value="0"></td>
-          <td><input type="radio" name="AR1" value="1"></td>
-          <td><input type="radio" name="AR1" value="2"></td>
-          <td><input type="radio" name="AR1" value="3"></td>
-        </tr>
-        <tr class="questionRow">
-          <td class="questionColm" id="answer2">{{ answer2 }}</td>
-          <td><input type="radio" name="AR2" value="0"></td>
-          <td><input type="radio" name="AR2" value="1"></td>
-          <td><input type="radio" name="AR2" value="2"></td>
-          <td><input type="radio" name="AR2" value="3"></td>
-        </tr>
-        <tr class="questionRow">
-          <td class="questionColm" id="answer3">{{ answer3 }}</td>
-          <td><input type="radio" name="AR3" value="0"></td>
-          <td><input type="radio" name="AR3" value="1"></td>
-          <td><input type="radio" name="AR3" value="2"></td>
-          <td><input type="radio" name="AR3" value="3"></td>
-        </tr>
+        {% for answer in answers %}
+          <tr class="questionRow">
+            <td class="questionColm">{{ answer.answer_text }}</td>
+            <td><input type="radio" name="{{ answer.id }}" value="0"></td>
+            <td><input type="radio" name="{{ answer.id }}" value="1"></td>
+            <td><input type="radio" name="{{ answer.id }}" value="2"></td>
+            <td><input type="radio" name="{{ answer.id }}" value="3"></td>
+          </tr>
+        {% endfor %}
       </table>
       </div>
+      {% endif %}
     <p class="disclaimer">The quality of your submissions influence your payment and bonuses you earn. Please answer carefully.</p>
      <input class="submitButton" type="submit" value="Next" id="submit" disabled="disabled">
     </form>
-  
+
   <script>
 
 $(document).ready(function(){
-  
-  var allchecked = 1;
+
+  var allchecked = 0;
 
   $("form").mouseup(function(){
+    //console.log($('input[type=radio]:checked').size());
     //alert($('input[type=radio]:checked').size());
-    allchecked = 1;
+    allchecked = 0;
     $('.questionRow').each(function () {
         // Question text
         var question = $(this).prev();
+
         // Validate
-        if (!$(this).find('input').is(':checked')) {
-            allchecked = 0;
+        if ($(this).find('input').is(':checked')) {
+            allchecked++;
         }
     });
-
-    if(allchecked == 1)
+    console.log(allchecked);
+    if(allchecked >= 5)
       $("form").find("input[type*='submit']").removeAttr("disabled").removeClass('disabled').addClass('enabled');
     else
       $("form").find("input[type*='submit']").attr("disabled", "disabled").removeClass('enabled').addClass('disabled');
-  
+
   });
- 
+
  });
 
- 
+
 
   </script>
 
