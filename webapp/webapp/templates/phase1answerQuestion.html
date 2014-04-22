@@ -45,13 +45,13 @@ function validateForm()
   if ( answer == null || answer =="" || answer.length<=1)
     {
    // alert("Please write the answer");
-   $("form").find("input[type*='submit']").attr("disabled", "disabled").removeClass('enabled').addClass('disabled');
+   $("form").find("input[id*='submit']").attr("disabled", "disabled").removeClass('enabled').addClass('disabled');
     
     return false;
     }
 
   else {
-     $("form").find("input[type*='submit']").removeAttr("disabled").removeClass('disabled').addClass('enabled');
+     $("form").find("input[id*='submit']").removeAttr("disabled").removeClass('disabled').addClass('enabled');
      return true;
   }
 }
