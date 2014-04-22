@@ -74,19 +74,19 @@ def rate(request):
         if w.cur_ans1_id != 0:
             a = Answer.objects.get(id=w.cur_ans1_id)
             a.num_ratings = a.num_ratings + 1
-            a.rating = update_rating(a.num_ratings, a.rating, request.POST['AR1'])
+            a.rating = update_rating(a.num_ratings, a.rating, request.POST[w.cur_ans1_id])
             a.save()
 
         if w.cur_ans2_id != 0:
             a = Answer.objects.get(id=w.cur_ans2_id)
             a.num_ratings = a.num_ratings + 1
-            a.rating = update_rating(a.num_ratings, a.rating, request.POST['AR2'])
+            a.rating = update_rating(a.num_ratings, a.rating, request.POST[w.cur_ans2_id])
             a.save()
  
         if w.cur_ans3_id != 0:
             a = Answer.objects.get(id=w.cur_ans3_id)
             a.num_ratings = a.num_ratings + 1
-            a.rating = update_rating(a.num_ratings, a.rating, request.POST['AR3'])
+            a.rating = update_rating(a.num_ratings, a.rating, request.POST[w.cur_ans3_id])
             a.save()       
         
         return HttpResponseRedirect('/decide')
@@ -102,18 +102,16 @@ def rate(request):
         count = a.count()
         if count > 0:
             random_idx = random.randint(0, count - 1)
-            a1 = a[random_idx]
-            a1_text = a1.answer_text 
-            answer_list.append(a1_text)
+            a1 = a[random_idx] 
+            answer_list.append(a1)
             w.cur_ans1_id = a1.id
         else:
             w.cur_ans1_id = 0;
 
         if count > 1:
             idx = (random_idx + 1) % count
-            a2 = a[idx]
-            a2_text = a2.answer_text 
-            answer_list.append(a2_text)
+            a2 = a[idx] 
+            answer_list.append(a2)
             w.cur_ans2_id = a2.id
         else:
             w.cur_ans2_id = 0;
@@ -121,15 +119,14 @@ def rate(request):
         if count > 2:
             idx = (random_idx + 2) % count
             a3 = a[idx]
-            a3_text = a3.answer_text 
-            answer_list.append(a3_text)
+            answer_list.append(a3)
             w.cur_ans3_id = a3.id
         else:
             w.cur_ans3_id = 0;
  
         w.save()
 
-        template_values = {'user_id':user, 'question':text, 'answer':answer_list}
+        template_values = {'user_id':user, 'question':text, 'answers':answer_list}
         return render(request, 'phase1rate.html', template_values)
 
 def decide(request):

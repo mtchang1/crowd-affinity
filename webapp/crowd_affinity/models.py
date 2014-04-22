@@ -19,7 +19,7 @@ class Question(models.Model):
     designer = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return self.question_text
+        return '(' + str(self.id) + ', ' + self.question_text + ', ' + str(self.parent_id) + ')'
 
 class Answer(models.Model):
     question = models.ForeignKey('Question')
@@ -29,7 +29,7 @@ class Answer(models.Model):
     num_ratings = models.IntegerField(default=0)
 
     def __unicode__(self):
-        return '(' + str(self.id) + ', ' + self.answer_text + ')'
+        return '(' + str(self.id) + ', ' + self.answer_text + ', ' + str(self.question_id) + ')'
 
 class Sentence(models.Model):
     answer = models.ForeignKey('Answer')
