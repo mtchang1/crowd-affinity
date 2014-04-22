@@ -292,6 +292,14 @@ input[type="submit"] {
     cursor: pointer; /* 3 */
 }
 
+input[type="submit"]:disabled
+{
+background:#dddddd;
+color:gray;
+}
+
+
+
 /**
  * Re-set default cursor for disabled elements.
  */
@@ -454,7 +462,7 @@ optgroup {
     border-radius:10px;
 }
 
-.submitButton:hover {
+.submitButton:enabled:hover {
     border: 2px solid #ccc;
     background: #ddd;
 }
