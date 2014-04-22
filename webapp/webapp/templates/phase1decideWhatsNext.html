@@ -10,9 +10,12 @@
         <header>
         <h2>What's Next?</h2>
         </header>
+        <p> user id = {{ user_id }} </p>
         <p>You have {{ remaining }} tasks left to do. You can ask a deeper question related to the one you just answered or answer a different question next.</p>
         <p>Select what you'd like to do next?</p>
-        <input class="submitButton" type="submit" value="Write a deeper question" onclick="location.href='askQuestion'">
-        <input class="submitButton" type="submit" value="Answer a new question" onclick="location.href='answerQuestion'">
+        <form method="post"> {% csrf_token %}
+        <input class="submitButton" name="ask" type="submit" value="Write a deeper question">
+        <input class="submitButton" name="ans" type="submit" value="Answer a new question">
+        </form>
     </body>
 </html>

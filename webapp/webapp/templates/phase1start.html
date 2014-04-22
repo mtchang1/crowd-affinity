@@ -16,9 +16,7 @@
     </div>
     <p class="disclaimer">The quality of your answers and questions will influence the payment you receive, so please choose "I don't know" to skip to the next question if you're not familiar with this particular topic.</p>
 
-    <!--<form action="/answerQuestion" method="get">
-        --> 
-        <form method="post"> {% csrf_token %}
+    <form method="post" > {% csrf_token %}
         <input class="submitButton" type="submit" value="Start">
     </form>
 </body>

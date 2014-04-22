@@ -42,6 +42,9 @@ class Tag(models.Model):
 
 class Worker(models.Model):
     current_question = models.ForeignKey('Question')
+    #cur_ans1 = models.ForeignKey('Answer')
+    #cur_ans2 = models.ForeignKey('Answer')
+    #cur_ans3 = models.ForeignKey('Answer')
     tasks = models.IntegerField(default=5)
 
     def __unicode__(self):

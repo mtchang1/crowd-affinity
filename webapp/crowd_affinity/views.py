@@ -18,31 +18,28 @@ def start1(request):
         user = authenticate(username=w.id, password="cp")
         if user is not None:
             login(request, user)
-            return answerQuestion(request)
-        else:
-            return render(request, 'phase1rate.html')
-    else:
-        return render(request, 'phase1start.html')
+            return HttpResponseRedirect('/answerQuestion')
+            
+    return render(request, 'phase1start.html')
 
 def answerQuestion(request): 
-    w = Worker.objects.get(id=request.user.username)
+    user = request.user
+    w = Worker.objects.get(id=user.username)
 
-    if request.method == "POST": 
-        q_id = w.current_question
+    if request.method == "POST":
         if request.POST.get('answer'):
             text = request.POST.get('answer')
+            q_id = w.current_question_id
 
-            answer = Answer(question_id=q_id, answer_text=text, user_id=w_id)
+            answer = Answer(question_id=q_id, answer_text=text, user_id=w.id)
             answer.save()
+            return HttpResponseRedirect('/rate')
 
-            return render(request, 'phase1rate.html')
-        else:
-            q_text = Question.objects.get(id=q_id).question_text
-            return render(request, 'phase1answerQuestion.html', {'question':q_text})
-    else: 
-        #default vars
-        q_id = 0;
-        q_text = "What color do you like on a chair?"
+        else: #get new question
+            return HttpResponseRedirect('/answerQuestion')
+    
+    #default vars
+    q_text = "default question"
 
     if Question.objects.count() > 0:
         random_idx = random.randint(0, Question.objects.count() - 1)
@@ -50,66 +47,89 @@ def answerQuestion(request):
         q_id = q.id
         q_text = q.question_text
 
-        w.current_question = q_id
+        w.current_question_id = q_id 
+        w.save()
 
-        return render(request, 'phase1answerQuestion.html', {'question':q_text})
-
-def askQuestion(request):
-    if request.POST.get('answer'):
-        text = request.POST.get('answer')
-
-        w = Worker.objects.get(id=request.user.username)
-
-        user = w.id
-        parent = w.current_question
-        answer = Question(question_text=text, parent_id=parent, user_id=user)
-        answer.save()
-
-        return checkTasks(request)
-    else: 
-        return render(request, 'phase1askQuestion.html')
+    return render(request, 'phase1answerQuestion.html', {'question':q_text, 'user_id':user})
 
 def rate(request):
-    w = Worker.objects.get(id=request.user.username)
+    user = request.user
+    w = Worker.objects.get(id=user.username)
 
     if request.POST.get('rateForm'):
-        #do something
-        if Answer.objects.count() > 0:
-            random_idx = random.randint(0, Answer.objects.count() - 1)
-            q = Answer.objects.all()[random_idx]
-            q_id = q.id
-            q_text = q.question_text
-
-        return render(request, 'phase1rate.html')
+        #TODO:get rating, add to db
+        
+        return HttpResponseRedirect('/decide')
     else: 
-        return render(request, 'phase1rate.html')
+        q_id = w.current_question_id
+        if q_id == 0:
+            text = "default question"
+        else:
+            q = Question.objects.get(id=q_id)
+            text = q.question_text
+        #TODO: implement
+        a1 = ""
+        a2 = ""
+        a3 = ""
+
+        template_values = {'user_id':user, 'question':text, 'answer1':a1, 'answer2':a2, 'answer3':a3}
+        return render(request, 'phase1rate.html', template_values)
 
 def decide(request):
-    w = Worker.objects.get(id=request.user.username)
+    user = request.user
+    w = Worker.objects.get(id=user.username)
     r = w.tasks
-    r = 5;
 
-    template_values = {'remaining':r}
-    if r > 0:
+    if request.POST.get('ask'):
+        return HttpResponseRedirect('/askQuestion')
+    if request.POST.get('ans'):
+        return HttpResponseRedirect('/answerQuestion')
+    
+    template_values = {'remaining':r-1, 'user_id':user}
+    if r > 1:   
         w.tasks = r-1
+        w.save()
         return render(request, 'phase1decideWhatsNext.html', template_values)
     else:
-        return finish(request)
+        return HttpResponseRedirect('/finish')
+
+def askQuestion(request):
+    user = request.user
+    w = Worker.objects.get(id=user.username)
+    parent = w.current_question_id   
+    if request.POST.get('answer'):
+        text = request.POST.get('answer')
+        question = Question(question_text=text, parent_id=parent, user_id=w.id)
+        question.save()
+
+        return HttpResponseRedirect('/linking')
+    else:
+        if Question.objects.count() > 0:
+            q = Question.objects.get(id=parent)
+            text = q.question_text
+        else:
+            text = "default question"
+        return render(request, 'phase1askQuestion.html', {'user_id':user, 'question':text})
 
 def linking(request):
-    w = Worker.objects.get(id=request.user.username)
+    user = request.user
+    w = Worker.objects.get(id=user.username)
     r = w.tasks
-    r = 5; 
-    
-    template_values = {'task_number':r, 'rem_task_number':5-r}
-    if r > 0:
+
+    if request.POST.get('next'):
+        return HttpResponseRedirect('/answerQuestion')
+   
+    template_values = {'task_number':r-1, 'rem_task_number':6-r, 'user_id':user}
+    if r > 1:
         w.tasks = r-1
+        w.save()
         return render(request, 'phase1linkingpage.html', template_values)
     else:
-        return finish(request)
+        return HttpResponseRedirect('/finish')
 
 def finish(request):
-    logout();
+    #give worker link:perhaps cookie/session_id?
+    logout(request);
     return render(request, 'phase1finish.html')
 
 

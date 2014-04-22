@@ -28,6 +28,7 @@ urlpatterns = patterns('',
     (r'^rate/?$', rate),
     (r'^decide/?$', decide),
     (r'^linking/?$', linking),
+    (r'^finish/?$', finish),
 
     (r'^start2/$', start2),
     (r'^write/?$', write),

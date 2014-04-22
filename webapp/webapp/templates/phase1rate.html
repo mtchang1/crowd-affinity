@@ -10,7 +10,8 @@
   <header>
 	  <h2>Rate Questions and Answers</h2>
   </header>
-    <p>Please rate the question you just answered and answers from others in the community.</p>
+  <p> user id = {{ user_id }} </p>
+  <p>Please rate the question you just answered and answers from others in the community.</p>
     <p>For reference, we have included the question here:</p>
     <p id="question">{{Question}}</p>
     <form name="rateForm" method="post" action='/decide' onsubmit="return validateForm()" > {% csrf_token %}
@@ -62,21 +63,21 @@
           <td class="ratingColm"><strong>Very Good</strong></td>
         </tr>
         <tr class="questionRow">
-          <td class="questionColm" id="answer1">{{ answer.1 }}</td>
+          <td class="questionColm" id="answer1">{{ answer1 }}</td>
           <td><input type="radio" name="AR1" value="0"></td>
           <td><input type="radio" name="AR1" value="1"></td>
           <td><input type="radio" name="AR1" value="2"></td>
           <td><input type="radio" name="AR1" value="3"></td>
         </tr>
         <tr class="questionRow">
-          <td class="questionColm" id="answer2">{{ answer.2 }}</td>
+          <td class="questionColm" id="answer2">{{ answer2 }}</td>
           <td><input type="radio" name="AR2" value="0"></td>
           <td><input type="radio" name="AR2" value="1"></td>
           <td><input type="radio" name="AR2" value="2"></td>
           <td><input type="radio" name="AR2" value="3"></td>
         </tr>
         <tr class="questionRow">
-          <td class="questionColm" id="answer3">{{ answer.3 }}</td>
+          <td class="questionColm" id="answer3">{{ answer3 }}</td>
           <td><input type="radio" name="AR3" value="0"></td>
           <td><input type="radio" name="AR3" value="1"></td>
           <td><input type="radio" name="AR3" value="2"></td>
@@ -93,7 +94,6 @@
 $(document).ready(function(){
   
   var allchecked = 1;
-
 
   $("form").mouseup(function(){
     //alert($('input[type=radio]:checked').size());

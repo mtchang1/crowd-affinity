@@ -12,12 +12,13 @@
   </header>
     <div class="box">
     <h3>Congrats!</h3>
+    <p> user id = {{ user_id }} </p>
     <p>You've already finished {{rem_task_number}} tasks. There are still {{task_number}} tasks left. </p>
     </div>
     <p class="disclaimer">The quality of your answers and questions will influence the payment you receive, so please choose "I don't know" to skip to the next question if you're not familiar with this particular topic.</p>
 
-    <form action="/answerQuestion" method="get">
-        <input type="submit" value="Next Task">
+    <form method="post"> {% csrf_token %}
+        <input type="submit" name="next" value="Next Task">
     </form>
 </body>
 </html>

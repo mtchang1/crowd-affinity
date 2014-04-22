@@ -10,6 +10,7 @@
         <header>
         <h2>Ask a new question about {{ topic }}</h2>
         </header>
+        <p> user_id = {{ user_id }} </p>
         <p>In this task, you will ask a deeper question, related to the one you just answered. There's an example below.</p>
         <div class="box">
             <h3>Example new question</h3>
@@ -23,7 +24,7 @@
         <blockquote>{{ question }}</blockquote>
         <p>Think about this question and consider how you could make it deeper. Fill in your suggestion below</p>
 
-        <form name="askQuestion" method="post" onsubmit="return validateForm()" action="/linking"> {% csrf_token %}
+        <form name="askQuestion" method="post" onsubmit="return validateForm()"> {% csrf_token %}
             <div class="box">
                 <h3>Ask a deeper question</h3>
                 <textarea type="text" name="answer" id="answer3" placeholder="Please write thoughtfully."></textarea>
