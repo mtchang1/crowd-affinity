@@ -65,7 +65,7 @@
         </tr>
         {% for answer in answers %}
           <tr class="questionRow">
-            <td class="questionColm" id="{{ answer.id }}">{{ answer.text }}</td>
+            <td class="questionColm">{{ answer.answer_text }}</td>
             <td><input type="radio" name="{{ answer.id }}" value="0"></td>
             <td><input type="radio" name="{{ answer.id }}" value="1"></td>
             <td><input type="radio" name="{{ answer.id }}" value="2"></td>
