@@ -2,16 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Rate Questions{% if len(answers) != 0 %} and Answers{% endif %}</title>
+    <title>Rate Questions{% if answers %} and Answers{% endif %}</title>
     <link rel="stylesheet" href="/static/css/style.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   </head>
   <body>
   <header>
-	  <h2>Rate Questions{% if len(answers) != 0 %} and Answers{% endif %}</h2>
+	  <h2>Rate Questions{% if answers %} and Answers{% endif %}</h2>
   </header>
   <p> user id = {{ user_id }} </p>
-  <p>Please rate the question you just answered{% if len(answers) != 0 %} and answers from others in the community{% endif %}.</p>
+  <p>Please rate the question you just answered{% if answers %} and answers from others in the community{% endif %}.</p>
     <p>For reference, we have included the question here:</p>
     <p id="question">{{Question}}</p>
     <form name="rateForm" method="post" action='/decide' onsubmit="return validateForm()" > {% csrf_token %}
@@ -50,7 +50,7 @@
         </tr>
       </table>
 	    </div>
-      {% if len(answer) != 0 %}
+      {% if answer %}
       <div class="box">
       <h3>Rate other's Answers</h3>
       <p>How good is each answer to the following question:</p>
