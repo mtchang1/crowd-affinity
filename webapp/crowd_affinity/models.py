@@ -1,10 +1,17 @@
 from django.db import models
 
 # Create your models here.
+"""class Topic(models.Model):
+    topic = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return self.topic"""
+
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     user_id = models.CharField(max_length=50)
     parent = models.ForeignKey('self')
+    #topic = models.ForeignKey('topic')
     rating_rel = models.IntegerField(default=0)
     rating_clear = models.IntegerField(default=0)
     rating_many = models.IntegerField(default=0)
@@ -42,9 +49,9 @@ class Tag(models.Model):
 
 class Worker(models.Model):
     current_question = models.ForeignKey('Question')
-    #cur_ans1 = models.ForeignKey('Answer')
-    #cur_ans2 = models.ForeignKey('Answer')
-    #cur_ans3 = models.ForeignKey('Answer')
+    cur_ans1 = models.ForeignKey('Answer', related_name='answer1')
+    cur_ans2 = models.ForeignKey('Answer', related_name='answer2')
+    cur_ans3 = models.ForeignKey('Answer', related_name='answer3')
     tasks = models.IntegerField(default=5)
 
     def __unicode__(self):
