@@ -427,11 +427,15 @@ optgroup {
     border: 2px solid #ddd;
     background: #eee;
     border-radius:10px;
+    -webkit-transition:.5s;
+    transition:.5s;
 }
 
 .box:hover {
     background: #ddd;
     border: 2px solid #ccc;
+    -webkit-transition:.5s;
+    transition:.5s;
 }
 
 .box h3 {
@@ -460,11 +464,15 @@ optgroup {
     border: 2px solid #ddd;
     background: #eee;
     border-radius:10px;
+    -webkit-transition:.5s;
+    transition:.5s;
 }
 
 .submitButton:enabled:hover {
     border: 2px solid #ccc;
     background: #ddd;
+    -webkit-transition:.5s;
+    transition:.5s;
 }
 
 table {
@@ -488,10 +496,14 @@ th {
     text-align: center;
     vertical-align:middle;
     border-top: 1px solid black;
+    -webkit-transition:.5s;
+    transition:.5s;
 }
 
 .questionRow:hover {
     background: -webkit-linear-gradient(rgba(0,0,0,.1) 0%, rgba(255,255,255,0) 100%);
+    -webkit-transition:.5s;
+    transition:.5s;
 }
 
 .ratingColm {

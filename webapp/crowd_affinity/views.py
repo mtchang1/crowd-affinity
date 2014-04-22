@@ -12,7 +12,7 @@ import random
 def start1(request):
     logout(request)
     if request.method == "POST":
-        w = Worker(current_question_id=0)
+        w = Worker(current_question_id=0, cur_ans1_id=0, cur_ans2_id=0, cur_ans3_id=0)
         w.save()
         worker = User.objects.create_user(username=w.id, email=None, password="cp")
         user = authenticate(username=w.id, password="cp")
@@ -52,27 +52,84 @@ def answerQuestion(request):
 
     return render(request, 'phase1answerQuestion.html', {'question':q_text, 'user_id':user})
 
+def update_rating(new_num_ratings, old_rating, new_rating):
+    return (old_rating * (new_num_ratings - 1) + new_rating) / new_num_ratings
+
 def rate(request):
     user = request.user
     w = Worker.objects.get(id=user.username)
+    q_id = w.current_question_id
 
     if request.POST.get('rateForm'):
-        #TODO:get rating, add to db
+        #get question rating
+        if q_id != 0:
+            q = Question.objects.get(id=q_id)
+            q.num_ratings = q.num_ratings + 1
+            q.rating_rel = update_rating(q.num_ratings, q.rating_rel, request.POST['QR1'])
+            q.rating_clear = update_rating(q.num_ratings, q.rating_clear, request.POST['QR2'])
+            q.rating_many = update_rating(q.num_ratings, q.rating_many, request.POST['QR3'])
+            q.save()
+            
+        #get answer rating
+        if w.cur_ans1_id != 0:
+            a = Answer.objects.get(id=w.cur_ans1_id)
+            a.num_ratings = a.num_ratings + 1
+            a.rating = update_rating(a.num_ratings, a.rating, request.POST['AR1'])
+            a.save()
+
+        if w.cur_ans2_id != 0:
+            a = Answer.objects.get(id=w.cur_ans2_id)
+            a.num_ratings = a.num_ratings + 1
+            a.rating = update_rating(a.num_ratings, a.rating, request.POST['AR2'])
+            a.save()
+ 
+        if w.cur_ans3_id != 0:
+            a = Answer.objects.get(id=w.cur_ans3_id)
+            a.num_ratings = a.num_ratings + 1
+            a.rating = update_rating(a.num_ratings, a.rating, request.POST['AR3'])
+            a.save()       
         
         return HttpResponseRedirect('/decide')
     else: 
-        q_id = w.current_question_id
         if q_id == 0:
             text = "default question"
         else:
             q = Question.objects.get(id=q_id)
             text = q.question_text
-        #TODO: implement
-        a1 = ""
-        a2 = ""
-        a3 = ""
+        
+        answer_list = []
+        a = Answer.objects.filter(question_id = q_id) 
+        count = a.count()
+        if count > 0:
+            random_idx = random.randint(0, count - 1)
+            a1 = a[random_idx]
+            a1_text = a1.answer_text 
+            answer_list.append(a1_text)
+            w.cur_ans1_id = a1.id
+        else:
+            w.cur_ans1_id = 0;
 
-        template_values = {'user_id':user, 'question':text, 'answer1':a1, 'answer2':a2, 'answer3':a3}
+        if count > 1:
+            idx = (random_idx + 1) % count
+            a2 = a[idx]
+            a2_text = a2.answer_text 
+            answer_list.append(a2_text)
+            w.cur_ans2_id = a2.id
+        else:
+            w.cur_ans2_id = 0;
+
+        if count > 2:
+            idx = (random_idx + 2) % count
+            a3 = a[idx]
+            a3_text = a3.answer_text 
+            answer_list.append(a3_text)
+            w.cur_ans3_id = a3.id
+        else:
+            w.cur_ans3_id = 0;
+ 
+        w.save()
+
+        template_values = {'user_id':user, 'question':text, 'answer':answer_list}
         return render(request, 'phase1rate.html', template_values)
 
 def decide(request):
