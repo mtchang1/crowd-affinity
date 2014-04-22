@@ -84,22 +84,26 @@
 $(document).ready(function(){
 
   var allchecked = 0;
+  var question_num = 0;
 
   $("form").mouseup(function(){
     //console.log($('input[type=radio]:checked').size());
     //alert($('input[type=radio]:checked').size());
     allchecked = 0;
+    question_num = 0;
     $('.questionRow').each(function () {
         // Question text
         var question = $(this).prev();
+        question_num++;
 
         // Validate
         if ($(this).find('input').is(':checked')) {
             allchecked++;
         }
     });
-    console.log(allchecked);
-    if(allchecked >= 5)
+    console.log(allchecked, question_num);
+
+    if(allchecked >= question_num-1)
       $("form").find("input[type*='submit']").removeAttr("disabled").removeClass('disabled').addClass('enabled');
     else
       $("form").find("input[type*='submit']").attr("disabled", "disabled").removeClass('enabled').addClass('disabled');
