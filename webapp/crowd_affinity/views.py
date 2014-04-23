@@ -9,6 +9,19 @@ from crowd_affinity.models import *
 import os.path
 import random
 
+def designer(request):
+    if request.method == "POST":
+        t = request.POST.get("topic")
+        topic = Topic(topic=t)
+        topic.save()
+
+        #for all questions given
+        q_text = request.POST.get("question1") #TODO: edit
+        q = Question(question_text=q_text, user_id=0, parent_id=0, topic_id=topic.id, designer=True)
+        q.save()
+
+    return render(request, 'designer.html')
+
 def start1(request):
     logout(request)
     if request.method == "POST":
@@ -40,17 +53,19 @@ def answerQuestion(request):
     
     #default vars
     q_text = "default question"
+    q_topic = "default topic"
 
     if Question.objects.count() > 0:
         random_idx = random.randint(0, Question.objects.count() - 1)
         q = Question.objects.all()[random_idx]
         q_id = q.id
         q_text = q.question_text
+        q_topic = Topic.objects.get(id=q.topic_id).topic
 
         w.current_question_id = q_id 
         w.save()
 
-    return render(request, 'phase1answerQuestion.html', {'question':q_text, 'user_id':user})
+    return render(request, 'phase1answerQuestion.html', {'topic':q_topic, 'question':q_text, 'user_id':user})
 
 def update_rating(new_num_ratings, old_rating, new_rating):
     return (old_rating * (new_num_ratings - 1) + new_rating) / new_num_ratings
@@ -150,10 +165,13 @@ def decide(request):
 def askQuestion(request):
     user = request.user
     w = Worker.objects.get(id=user.username)
-    parent = w.current_question_id   
+    parent = w.current_question_id
+    
     if request.POST.get('answer'):
         text = request.POST.get('answer')
-        question = Question(question_text=text, parent_id=parent, user_id=w.id)
+        p = Question.objects.get(id=parent)
+
+        question = Question(question_text=text, parent_id=parent, topic=p.topic, user_id=w.id)
         question.save()
 
         return HttpResponseRedirect('/linking')

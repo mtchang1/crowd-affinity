@@ -1,17 +1,17 @@
 from django.db import models
 
 # Create your models here.
-"""class Topic(models.Model):
+class Topic(models.Model):
     topic = models.CharField(max_length=50)
 
     def __unicode__(self):
-        return self.topic"""
+        return self.topic
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     user_id = models.CharField(max_length=50)
     parent = models.ForeignKey('self')
-    #topic = models.ForeignKey('topic')
+    topic = models.ForeignKey('topic')
     rating_rel = models.IntegerField(default=0)
     rating_clear = models.IntegerField(default=0)
     rating_many = models.IntegerField(default=0)

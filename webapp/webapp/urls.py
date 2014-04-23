@@ -22,6 +22,8 @@ urlpatterns = patterns('',
               {'document_root': settings.STATIC_ROOT,
                        'show_indexes': True}),
     # urls
+    (r'^designer/$', designer),
+    
     (r'^start1/$', start1),
     (r'^answerQuestion/?$', answerQuestion),
     (r'^askQuestion/?$', askQuestion),
