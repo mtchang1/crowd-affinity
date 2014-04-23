@@ -10,8 +10,8 @@
   <header>
 	  <h2>Rate Questions{% if answers %} and Answers{% endif %}</h2>
   </header>
-  <p> user id = {{ user_id }} </p>
-  <p>Please rate the question you just answered{% if answers %} and answers from others in the community{% endif %}.</p> 
+
+  <p>Please rate the question you just answered{% if answers %} and answers from others in the community{% endif %}.</p>
     <form name="rateForm" method="post" onsubmit="return validateForm()" > {% csrf_token %}
     <div class="box">
 	    <h3>Rate the Question</h3>

@@ -33,7 +33,7 @@
   $(function() {
   $("#answer5").bind("keyup", validateForm);
   });
-         
+
 
   function validateForm()
           {
@@ -48,7 +48,7 @@
             {
            // alert("Please write the answer");
            $("form").find("input[type*='submit']").attr("disabled", "disabled").removeClass('enabled').addClass('disabled');
-            
+
             return false;
             }
 
