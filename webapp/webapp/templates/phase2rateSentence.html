@@ -38,12 +38,12 @@
     </div>
     <input class="submitButton" type="submit" value="Next" disabled="disabled">
 
- </form> 
+ </form>
  <script>
 
  $(document).ready(function(){
-  
- 
+
+
   var allchecked = 0;
 
 
@@ -54,7 +54,7 @@
     $('.questionRow').each(function () {
         // Question text
         var question = $(this).prev();
-       
+
         // Validate
         if ($(this).find('input').is(':checked')) {
             allchecked++;
@@ -65,9 +65,9 @@
       $("form").find("input[type*='submit']").removeAttr("disabled").removeClass('disabled').addClass('enabled');
     else
       $("form").find("input[type*='submit']").attr("disabled", "disabled").removeClass('enabled').addClass('disabled');
-  
+
   });
- 
+
  });
 
 
