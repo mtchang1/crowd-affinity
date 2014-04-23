@@ -20,7 +20,7 @@ def designer(request):
         q = Question(question_text=q_text, user_id=0, parent_id=0, topic_id=topic.id, designer=True)
         q.save()
 
-    return render(request, 'designer.html')
+    return render(request, 'designerPage.html')
 
 def start1(request):
     logout(request)
@@ -176,12 +176,15 @@ def askQuestion(request):
 
         return HttpResponseRedirect('/linking')
     else:
+        text = "default question"
+        topic = "default topic"
         if Question.objects.count() > 0:
             q = Question.objects.get(id=parent)
             text = q.question_text
-        else:
-            text = "default question"
-        return render(request, 'phase1askQuestion.html', {'user_id':user, 'question':text})
+
+            topic = Topic.objects.get(id=q.topic_id).topic
+        
+        return render(request, 'phase1askQuestion.html', {'user_id':user, 'question':text, 'topic':topic})
 
 def linking(request):
     user = request.user
