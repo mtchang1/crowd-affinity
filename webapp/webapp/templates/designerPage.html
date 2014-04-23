@@ -13,12 +13,12 @@
         <form name="designerForm" method="post"> {% csrf_token %}
 
             <p> Please describe your project in a few words. </p>
-            <p class="disclaimer"> Be as specific and concise as possible 
+            <p class="disclaimer"> Be as specific and concise as possible
                     (i.e. Designing an office chair, planning a 5 year-old's birthday party)</p>
             <div class="box">
-                <textarea type="text" name="topic" ></textarea>
+            <input type="text" name="topic" >
             </div>
-           
+
             <p> Write down a few questions that you have about your project. </p>
             <p class="disclaimer"> i.e. What would a 5 year-old girl like at her birthday party? </p>
             <div class="box" id=questions>
@@ -27,10 +27,10 @@
             <button class="submitButton" type="button" onclick="add_question()">Add another question</button>
             <input class="submitButton" type="submit" value="submit" id="submit">
         </form>
-        
+
            <script>
             var questions = 1;
-            
+
             function add_question(){
                 questions++;
                 if(questions<=3){
