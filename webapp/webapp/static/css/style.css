@@ -442,7 +442,7 @@ optgroup {
     margin: 0 0 10px 0;
 }
 
-.box textarea {
+.box textarea{
     width: 475px;
     height: 4em;
     font-size: large;
@@ -450,6 +450,15 @@ optgroup {
     padding: 5px;
     border-radius:5px;
     border: none;
+}
+
+.box input[type=text]{
+  width: 475px;
+  font-size: large;
+  margin: 0;
+  padding: 5px;
+  border-radius:5px;
+  border: none;
 
 }
 
