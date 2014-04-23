@@ -11,7 +11,7 @@
         <h2>What's Next?</h2>
         </header>
         <p> user id = {{ user_id }} </p>
-        <p>You have {{ remaining }} tasks left to do. You can ask a deeper question related to the one you just answered or answer a different question next.</p>
+        <p>You have {{ remaining }} task(s) left to do. You can ask a deeper question related to the one you just answered or answer a different question next.</p>
         <p>Select what you'd like to do next?</p>
         <form method="post"> {% csrf_token %}
         <input class="submitButton" name="ask" type="submit" value="Write a deeper question">

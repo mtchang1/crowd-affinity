@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from crowd_affinity.models import *
 import os.path
 import random
+import string
 
 def designer(request):
     if request.method == "POST":
@@ -16,16 +17,30 @@ def designer(request):
         topic.save()
 
         #for all questions given
-        q_text = request.POST.get("question1") #TODO: edit
+        q_text = request.POST.get("question1") 
         q = Question(question_text=q_text, user_id=0, parent_id=0, topic_id=topic.id, designer=True)
         q.save()
 
+        if request.POST.get("question2"):
+            q_text = request.POST.get("question2") 
+            q = Question(question_text=q_text, user_id=0, parent_id=0, topic_id=topic.id, designer=True)
+            q.save()
+
+        if request.POST.get("question3"):
+            q_text = request.POST.get("question3") 
+            q = Question(question_text=q_text, user_id=0, parent_id=0, topic_id=topic.id, designer=True)
+            q.save()
+
     return render(request, 'designerPage.html')
+
+def generateCode():
+    chars = string.ascii_uppercase + string.digits
+    return ''.join(random.choice(chars) for _ in range(10))
 
 def start1(request):
     logout(request)
     if request.method == "POST":
-        w = Worker(current_question_id=0, cur_ans1_id=0, cur_ans2_id=0, cur_ans3_id=0)
+        w = Worker(current_question_id=0, cur_ans1_id=0, cur_ans2_id=0, cur_ans3_id=0, code=generateCode())
         w.save()
         worker = User.objects.create_user(username=w.id, email=None, password="cp")
         user = authenticate(username=w.id, password="cp")
@@ -205,9 +220,12 @@ def linking(request):
         return HttpResponseRedirect('/finish')
 
 def finish(request):
-    #give worker link:perhaps cookie/session_id?
+    user = request.user
+    w = Worker.objects.get(id=user.username)
+    code = w.code
+    
     logout(request);
-    return render(request, 'phase1finish.html')
+    return render(request, 'phase1finish.html', {'code':code})
 
 
 #phase 2

@@ -53,6 +53,7 @@ class Worker(models.Model):
     cur_ans2 = models.ForeignKey('Answer', related_name='answer2')
     cur_ans3 = models.ForeignKey('Answer', related_name='answer3')
     tasks = models.IntegerField(default=5)
+    code = models.CharField(max_length=10)
 
     def __unicode__(self):
         return str(self.id)

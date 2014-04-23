@@ -2,30 +2,30 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>For Designer - Set a topic</title>
+        <title>Designer Input Form</title>
         <link rel="stylesheet" href="/static/css/style.css">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     </head>
     <body>
         <header>
-        <h2>For designer - set a topic</h2>
+        <h2>Designer Input Form</h2>
         </header>
-        <form name="designerForm" method="post"> {% csrf_token %}
+        <form name="designerForm" method="post" onsubmit="return validateForm()"> {% csrf_token %}
 
             <p> Please describe your project in a few words. </p>
             <p class="disclaimer"> Be as specific and concise as possible
                     (i.e. Designing an office chair, planning a 5 year-old's birthday party)</p>
             <div class="box">
-            <input type="text" name="topic" >
+            <input type="text" name="topic" id="topic">
             </div>
 
-            <p> Write down a few questions that you have about your project. </p>
+            <p> Write down 1-3 questions that you have about your project. </p>
             <p class="disclaimer"> i.e. What would a 5 year-old girl like at her birthday party? </p>
             <div class="box" id=questions>
-                <textarea type="text" name="question1"></textarea>
+                <textarea type="text" name="question1" id="question1" placeholder="Please write at least one question!"></textarea>
             </div>
-            <button class="submitButton" type="button" onclick="add_question()">Add another question</button>
-            <input class="submitButton" type="submit" value="submit" id="submit">
+            <button class="submitButton" type="button" id="button" onclick="add_question()">Add another question</button>
+            <input class="submitButton" type="submit" value="submit" id="submit" disabled="disabled">
         </form>
 
            <script>
@@ -33,13 +33,43 @@
 
             function add_question(){
                 questions++;
+                if(questions==3) {
+                    document.getElementById('button').style.visibility = 'hidden';
+                }
                 if(questions<=3){
                     var input = document.createElement("textarea");
                     var div = document.getElementById("questions");
-                    input.class = "question2";
+                    input.name = "question" + questions;
                     div.appendChild(input);
+                } 
+            }
+
+
+            $(function() {
+                $("#topic").bind("keyup", validateForm);
+                $("#question1").bind("keyup", validateForm);
+            });
+
+            function validateForm()
+            {
+                //alert("keyup!");
+                var topic = document.forms["designerForm"]["topic"].value;
+                var question = document.forms["designerForm"]["question1"].value; 
+
+                if ( topic == null || topic =="" || question == null || question == "")
+                {
+                    // alert("Please write the answer");
+                    $("form").find("input[id*='submit']").attr("disabled", "disabled").removeClass('enabled').addClass('disabled');
+
+                    return false;
+                }
+
+                else {
+                    $("form").find("input[id*='submit']").removeAttr("disabled").removeClass('disabled').addClass('enabled');
+                    return true;
                 }
             }
+
        </script>
 
         <style>
