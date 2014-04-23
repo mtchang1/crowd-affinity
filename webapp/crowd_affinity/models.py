@@ -12,24 +12,24 @@ class Question(models.Model):
     user_id = models.CharField(max_length=50)
     parent = models.ForeignKey('self')
     topic = models.ForeignKey('topic')
-    rating_rel = models.IntegerField(default=0)
-    rating_clear = models.IntegerField(default=0)
-    rating_many = models.IntegerField(default=0)
+    rating_rel = models.FloatField(default=0.0)
+    rating_clear = models.FloatField(default=0.0)
+    rating_many = models.FloatField(default=0.0)
     num_ratings = models.IntegerField(default=0)
     designer = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return '(' + str(self.id) + ', ' + self.question_text + ', ' + str(self.parent_id) + ')'
+        return '(' + str(self.id) + ', ' + self.question_text + ', ' + str(self.parent_id) + ", " + str(self.rating_rel) + ", " + str(self.num_ratings) + ')'
 
 class Answer(models.Model):
     question = models.ForeignKey('Question')
     answer_text = models.CharField(max_length=500)
     user_id = models.CharField(max_length=50)
-    rating = models.IntegerField(default=0)
+    rating = models.FloatField(default=0.0)
     num_ratings = models.IntegerField(default=0)
 
     def __unicode__(self):
-        return '(' + str(self.id) + ', ' + self.answer_text + ', ' + str(self.question_id) + ')'
+        return '(' + str(self.id) + ', ' + self.answer_text + ', ' + str(self.question_id) + ", " + str(self.rating) + ", " + str(self.num_ratings) + ')'
 
 class Sentence(models.Model):
     answer = models.ForeignKey('Answer')

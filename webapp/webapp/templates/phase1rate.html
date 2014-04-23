@@ -12,7 +12,7 @@
   </header>
   <p> user id = {{ user_id }} </p>
   <p>Please rate the question you just answered{% if answers %} and answers from others in the community{% endif %}.</p> 
-    <form name="rateForm" method="post" action='/decide' onsubmit="return validateForm()" > {% csrf_token %}
+    <form name="rateForm" method="post" onsubmit="return validateForm()" > {% csrf_token %}
     <div class="box">
 	    <h3>Rate the Question</h3>
       <p>How much do you agree with the following statements about the following question:</p>
@@ -26,25 +26,25 @@
           <td class="ratingColm"><strong>Strongly Agree</strong></td>
         </tr>
         <tr class="questionRow">
-          <td class="questionColm">The question is relevant to this topic: <span >{{ topic }}</span></td>
-          <td><input type="radio" name="QR1" value="1"></td>
-          <td><input type="radio" name="QR1" value="2"></td>
-          <td><input type="radio" name="QR1" value="3"></td>
-          <td><input type="radio" name="QR1" value="4"></td>
+          <td class="questionColm">The question is relevant to the topic: (<span >{{ topic }}</span>)</td>
+          <td><input type="radio" name="QR1" value=1></td>
+          <td><input type="radio" name="QR1" value=2></td>
+          <td><input type="radio" name="QR1" value=3></td>
+          <td><input type="radio" name="QR1" value=4></td>
         </tr>
         <tr class="questionRow">
           <td class="questionColm">The question is clear and concise.</td>
-          <td><input type="radio" name="QR2" value="1"></td>
-          <td><input type="radio" name="QR2" value="2"></td>
-          <td><input type="radio" name="QR2" value="3"></td>
-          <td><input type="radio" name="QR2" value="4"></td>
+          <td><input type="radio" name="QR2" value=1></td>
+          <td><input type="radio" name="QR2" value=2></td>
+          <td><input type="radio" name="QR2" value=3></td>
+          <td><input type="radio" name="QR2" value=4></td>
         </tr>
         <tr class="questionRow">
           <td class="questionColm">The question can generate many different answers. </td>
-          <td><input type="radio" name="QR3" value="1"></td>
-          <td><input type="radio" name="QR3" value="2"></td>
-          <td><input type="radio" name="QR3" value="3"></td>
-          <td><input type="radio" name="QR3" value="4"></td>
+          <td><input type="radio" name="QR3" value=1></td>
+          <td><input type="radio" name="QR3" value=2></td>
+          <td><input type="radio" name="QR3" value=3></td>
+          <td><input type="radio" name="QR3" value=4></td>
         </tr>
       </table>
 	    </div>
