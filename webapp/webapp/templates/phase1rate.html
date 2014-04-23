@@ -11,9 +11,7 @@
 	  <h2>Rate Questions{% if answers %} and Answers{% endif %}</h2>
   </header>
   <p> user id = {{ user_id }} </p>
-  <p>Please rate the question you just answered{% if answers %} and answers from others in the community{% endif %}.</p>
-    <p>For reference, we have included the question here:</p>
-    <p id="question">{{Question}}</p>
+  <p>Please rate the question you just answered{% if answers %} and answers from others in the community{% endif %}.</p> 
     <form name="rateForm" method="post" action='/decide' onsubmit="return validateForm()" > {% csrf_token %}
     <div class="box">
 	    <h3>Rate the Question</h3>
@@ -22,38 +20,38 @@
       <table>
         <tr id="headerRow">
           <td class="questionColm"><strong></strong></td>
-          <td class="ratingColm"><strong>Strongly Agree</strong></td>
-          <td class="ratingColm"><strong>Somewhat Agree</strong></td>
-          <td class="ratingColm"><strong>Somewhat Disagree</strong></td>
           <td class="ratingColm"><strong>Strongly Disagree</strong></td>
+          <td class="ratingColm"><strong>Somewhat Disagree</strong></td>
+          <td class="ratingColm"><strong>Somewhat Agree</strong></td>
+          <td class="ratingColm"><strong>Strongly Agree</strong></td>
         </tr>
         <tr class="questionRow">
-          <td class="questionColm">The question is relevant to <span >{{ topic }}</span></td>
-          <td><input type="radio" name="QR1" value="0"></td>
+          <td class="questionColm">The question is relevant to this topic: <span >{{ topic }}</span></td>
           <td><input type="radio" name="QR1" value="1"></td>
           <td><input type="radio" name="QR1" value="2"></td>
           <td><input type="radio" name="QR1" value="3"></td>
+          <td><input type="radio" name="QR1" value="4"></td>
         </tr>
         <tr class="questionRow">
-          <td class="questionColm">The question is clear and consice</td>
-          <td><input type="radio" name="QR2" value="0"></td>
+          <td class="questionColm">The question is clear and concise.</td>
           <td><input type="radio" name="QR2" value="1"></td>
           <td><input type="radio" name="QR2" value="2"></td>
           <td><input type="radio" name="QR2" value="3"></td>
+          <td><input type="radio" name="QR2" value="4"></td>
         </tr>
         <tr class="questionRow">
-          <td class="questionColm">The question is worth to generate many answers</td>
-          <td><input type="radio" name="QR3" value="0"></td>
+          <td class="questionColm">The question can generate many different answers. </td>
           <td><input type="radio" name="QR3" value="1"></td>
           <td><input type="radio" name="QR3" value="2"></td>
           <td><input type="radio" name="QR3" value="3"></td>
+          <td><input type="radio" name="QR3" value="4"></td>
         </tr>
       </table>
 	    </div>
       {% if answers %}
       <div class="box">
       <h3>Rate other's Answers</h3>
-      <p>How good is each answer to the following question:</p>
+      <p>How accurately does the statement below answer the question?</p>
       <blockquote>{{ question }}</blockquote>
       <table>
         <tr id="headerRow">
@@ -66,10 +64,10 @@
         {% for answer in answers %}
           <tr class="questionRow">
             <td class="questionColm">{{ answer.answer_text }}</td>
-            <td><input type="radio" name="{{ answer.id }}" value="0"></td>
             <td><input type="radio" name="{{ answer.id }}" value="1"></td>
             <td><input type="radio" name="{{ answer.id }}" value="2"></td>
             <td><input type="radio" name="{{ answer.id }}" value="3"></td>
+            <td><input type="radio" name="{{ answer.id }}" value="4"></td>
           </tr>
         {% endfor %}
       </table>
