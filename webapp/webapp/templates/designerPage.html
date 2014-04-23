@@ -1,0 +1,79 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>For Designer - Set a topic</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  </head>
+  <body>
+  <header>
+	  <h2>For designer - set a topic</h2>
+  </header>
+  <form name="answerQuestion" method="post">
+      <p> Please tell us a topic that you're interested in. </p>
+      
+    <p> Your designer id is {{ user_id }} </p>    
+    <div class="box">
+        <p id="question">Please enter the topic here</p>
+        <textarea type="text" name="answer" id="answer2" placeholder="Please use a complete sentence."></textarea>
+    </div>
+    
+    <div class="box" id="questions">
+        <p id="question">Please add questions related to the topic here (you can add up to three questions) </p>
+
+        <textarea type="text" name="answer" id="question1" placeholder="Please use a complete question."></textarea>
+        
+       
+    </div>
+    <input class="submitButton" type="submit" value="submit" id="submit">
+</form>
+
+ <button onclick="add_question()">Add another question</button>
+
+<script>
+var questions = 1;
+
+function add_question(){
+
+  questions++;
+  if(questions<=3){
+      var input = document.createElement("textarea");
+  var div = document.getElementById("questions");
+  input.class = "question2";
+  div.appendChild(input);
+  }
+
+}
+
+
+// function validateForm()
+//   {
+//     //alert("keyup!");
+//   var answer = document.forms["answerQuestion"]["answer"].value;
+
+//   while(answer.lastIndexOf(" ")>=0){
+//     answer = answer.replace(" ","");
+//     }
+
+//   if ( answer == null || answer =="" || answer.length<=1)
+//     {
+//    // alert("Please write the answer");
+//    $("form").find("input[id*='submit']").attr("disabled", "disabled").removeClass('enabled').addClass('disabled');
+    
+//     return false;
+//     }
+
+//   else {
+//      $("form").find("input[id*='submit']").removeAttr("disabled").removeClass('disabled').addClass('enabled');
+//      return true;
+//   }
+// }
+  </script>
+
+  <style>
+
+
+  </style>
+  </body>
+</html>
