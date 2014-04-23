@@ -35,12 +35,16 @@ def designer(request):
 
 def generateCode():
     chars = string.ascii_uppercase + string.digits
-    return ''.join(random.choice(chars) for _ in range(10))
+    return ''.join(random.choice(chars) for _ in range(7))
 
 def start1(request):
     logout(request)
     if request.method == "POST":
-        w = Worker(current_question_id=0, cur_ans1_id=0, cur_ans2_id=0, cur_ans3_id=0, code=generateCode())
+        w = Worker(current_question_id=0, cur_ans1_id=0, cur_ans2_id=0, cur_ans3_id=0)
+        w.save()
+        
+        user_code = generateCode() + str(w.id)
+        w.code = user_code
         w.save()
         worker = User.objects.create_user(username=w.id, email=None, password="cp")
         user = authenticate(username=w.id, password="cp")
@@ -117,7 +121,10 @@ def rate(request):
             a = Answer.objects.get(id=w.cur_ans3_id)
             a.num_ratings = a.num_ratings + 1
             a.rating = update_rating(a.num_ratings, a.rating, float(request.POST[str(w.cur_ans3_id)]))
-            a.save()       
+            a.save()
+
+        w.tasks -= 1
+        w.save()
         
         return HttpResponseRedirect('/decide')
     else: 
@@ -171,10 +178,8 @@ def decide(request):
     if request.POST.get('ans'):
         return HttpResponseRedirect('/answerQuestion')
     
-    template_values = {'remaining':r-1, 'user_id':user}
-    if r > 1:   
-        w.tasks = r-1
-        w.save()
+    template_values = {'remaining':r, 'user_id':user}
+    if r > 0:  
         return render(request, 'phase1decideWhatsNext.html', template_values)
     else:
         return HttpResponseRedirect('/finish')
@@ -191,6 +196,8 @@ def askQuestion(request):
         question = Question(question_text=text, parent_id=parent, topic=p.topic, user_id=w.id)
         question.save()
 
+        w.tasks -= 1
+        w.save()
         return HttpResponseRedirect('/linking')
     else:
         text = "default question"
@@ -211,10 +218,8 @@ def linking(request):
     if request.POST.get('next'):
         return HttpResponseRedirect('/answerQuestion')
    
-    template_values = {'task_number':r-1, 'rem_task_number':6-r, 'user_id':user}
-    if r > 1:
-        w.tasks = r-1
-        w.save()
+    template_values = {'task_number':r, 'rem_task_number':5-r, 'user_id':user}
+    if r > 0:
         return render(request, 'phase1linkingpage.html', template_values)
     else:
         return HttpResponseRedirect('/finish')

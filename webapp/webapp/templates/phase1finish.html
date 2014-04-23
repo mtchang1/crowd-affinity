@@ -10,7 +10,7 @@
   <header>
 	  <h2>Congrats, you finished all the tasks!</h2>
   </header>
-  <form method="post">
+  <form method="post"> {% csrf_token %}
     <div class="box">
       <h3>Back to Mechanical Turk</h3>
       <p>Please copy the code below and paste back to the Mechanical Turk page. By doing so, we can connect your Turk ID with what you did.</p>
