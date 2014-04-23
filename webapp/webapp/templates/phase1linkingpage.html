@@ -2,23 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Questions about {{ topic }}</title>
+    <title>You've completed {{rem_task_number}} of {{task_number}} tasks.</title>
     <link rel="stylesheet" href="/static/css/style.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   </head>
   <body>
   <header>
-	  <h2>Questions about {{ topic }}</h2>
   </header>
     <div class="box">
     <h3>Congrats!</h3>
     <p> user id = {{ user_id }} </p>
-    <p>You've already finished {{rem_task_number}} tasks. There are still {{task_number}} tasks left. </p>
+    <p>You've finished {{rem_task_number}} tasks. You need to complete {{task_number}} more to be finished. </p>
     </div>
-    <p class="disclaimer">The quality of your answers and questions will influence the payment you receive, so please choose "I don't know" to skip to the next question if you're not familiar with this particular topic.</p>
+    <p class="disclaimer">Please don't stop until you've completed all the tasks or you will not be able to recieve payment.</p>
 
     <form method="post"> {% csrf_token %}
-        <input type="submit" name="next" value="Next Task">
+        <input class="submitButton" type="submit" name="next" value="Next Task">
     </form>
 </body>
 </html>
