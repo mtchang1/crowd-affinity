@@ -1,4 +1,5 @@
 # Create your views here.
+from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.contrib import auth
 from django.contrib.auth import authenticate, login, logout
@@ -50,7 +51,7 @@ def start1(request):
         user = authenticate(username=w.id, password="cp")
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect('/answerQuestion')
+            return HttpResponseRedirect(reverse(answerQuestion))
             
     return render(request, 'phase1start.html')
 
@@ -65,10 +66,10 @@ def answerQuestion(request):
 
             answer = Answer(question_id=q_id, answer_text=text, user_id=w.id)
             answer.save()
-            return HttpResponseRedirect('/rate')
+            return HttpResponseRedirect(reverse(rate))
 
         else: #get new question
-            return HttpResponseRedirect('/answerQuestion')
+            return HttpResponseRedirect(reverse(answerQuestion))
     
     #default vars
     q_text = "default question"
@@ -126,7 +127,7 @@ def rate(request):
         w.tasks -= 1
         w.save()
         
-        return HttpResponseRedirect('/decide')
+        return HttpResponseRedirect(reverse(decide))
     else: 
         if q_id == 0:
             text = "default question"
@@ -174,15 +175,15 @@ def decide(request):
     r = w.tasks
 
     if request.POST.get('ask'):
-        return HttpResponseRedirect('/askQuestion')
+        return HttpResponseRedirect(reverse(askQuestion))
     if request.POST.get('ans'):
-        return HttpResponseRedirect('/answerQuestion')
+        return HttpResponseRedirect(reverse(answerQuestion))
     
     template_values = {'remaining':r, 'user_id':user}
     if r > 0:  
         return render(request, 'phase1decideWhatsNext.html', template_values)
     else:
-        return HttpResponseRedirect('/finish')
+        return HttpResponseRedirect(reverse(finish))
 
 def askQuestion(request):
     user = request.user
@@ -198,7 +199,7 @@ def askQuestion(request):
 
         w.tasks -= 1
         w.save()
-        return HttpResponseRedirect('/linking')
+        return HttpResponseRedirect(reverse(linking))
     else:
         text = "default question"
         topic = "default topic"
@@ -216,13 +217,13 @@ def linking(request):
     r = w.tasks
 
     if request.POST.get('next'):
-        return HttpResponseRedirect('/answerQuestion')
+        return HttpResponseRedirect(reverse(answerQuestion))
    
     template_values = {'task_number':r, 'rem_task_number':5-r, 'user_id':user}
     if r > 0:
         return render(request, 'phase1linkingpage.html', template_values)
     else:
-        return HttpResponseRedirect('/finish')
+        return HttpResponseRedirect(reverse(finish))
 
 def finish(request):
     user = request.user

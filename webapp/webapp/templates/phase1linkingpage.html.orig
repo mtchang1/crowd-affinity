@@ -1,0 +1,28 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>You've completed {{rem_task_number}} of {{task_number}} tasks.</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  </head>
+  <body>
+  <header>
+  </header>
+    <div class="box">
+    <h3>Congrats!</h3>
+<<<<<<< HEAD
+    <p> user id = {{ user_id }} </p>
+    <p>You've finished {{rem_task_number}} task(s). You need to complete {{task_number}} more to be finished. </p>
+=======
+    
+    <p>You've finished {{rem_task_number}} tasks. You need to complete {{task_number}} more to be finished. </p>
+>>>>>>> 0b16eede0f89e3b0dee0f13b1e5d6d1f976a8f68
+    </div>
+    <p class="disclaimer">Please don't stop until you've completed all the tasks or you will not be able to recieve payment.</p>
+
+    <form method="post"> {% csrf_token %}
+        <input class="submitButton" type="submit" name="next" value="Next Task">
+    </form>
+</body>
+</html>
