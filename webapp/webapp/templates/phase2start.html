@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Writing about {{ topic }}</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   </head>
   <body>
@@ -16,8 +16,8 @@
     <p>We need your help to integrate them into one sentence and give the sentence some tags. You need to complete 5 small tasks like this to complete the hit.</p>
   </div>
     <p class="disclaimer">The quality of your work will influence the payment you receive so please try your best.</p>
-
-    <input class="submitButton" type="submit" value="Start" onclick="location.href='/write'">
-
+    <form method="POST"> {% csrf_token %}
+    <input class="submitButton" type="submit" value="Start">
+    </form>
   </body>
 </html>

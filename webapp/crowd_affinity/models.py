@@ -57,3 +57,12 @@ class Worker(models.Model):
 
     def __unicode__(self):
         return str(self.id)
+
+class WorkerTwo(models.Model):
+    current_answer = models.ForeignKey('Answer')
+    current_sentence = models.ForeignKey('Sentence') 
+    tasks = models.IntegerField(default=5)
+    code = models.CharField(max_length=10)
+
+    def __unicode__(self):
+        return str(self.id)

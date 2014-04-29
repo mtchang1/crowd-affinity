@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Rewrite The Sentence</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   </head>
   <body>
@@ -12,7 +12,7 @@
   </header>
 
     <p>Improve the sentence describing this question and answer.</p>
-   <form name="rewriteSentence" method="post" onsubmit="return validateForm()">
+    <form name="rewriteSentence" method="post" onsubmit="return validateForm()"> {% csrf_token %}
     <div class="box">
     <h3>Rewrite the Sentence Below</h3>
     <p><strong>Question</strong></p>

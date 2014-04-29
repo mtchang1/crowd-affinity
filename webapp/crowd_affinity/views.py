@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
+from django.core.exceptions import ObjectDoesNotExist
 from crowd_affinity.models import *
 import os.path
 import random
@@ -235,22 +236,174 @@ def finish(request):
 
 
 #phase 2
+
+#handle duplicate worker IDs for users
+def getUID(workerID):
+    return "two" + str(workerID)
+
+def getWID(userID):
+    return userID[3:]
+    
 def start2(request):
+
+    logout(request)
+    if request.method == "POST":
+        w = WorkerTwo(current_answer_id=0, current_sentence_id=0)
+        w.save()
+
+        user_code = generateCode() + str(w.id)
+        w.code = user_code
+        w.save()
+        worker = User.objects.create_user(username=getUID(w.id), email=None, password="cp")
+        user = authenticate(username=getUID(w.id), password="cp")
+        if user is not None:
+            login(request, user)
+        return HttpResponseRedirect(reverse(write))
+
     return render(request, 'phase2start.html')
 
 def write(request):
-    #ans = Answer.objects.get(question_id=0)
-    ans = "hi"
-    template_values = {'question':"", 'answer':ans}
-    return render(request, 'phase2MakeSentence.html', template_values)
+    user = request.user
+    w = WorkerTwo.objects.get(id=getWID(user.username))
+    
+    if request.POST.get('answer'):
+        text = request.POST.get('answer')
+        a_id = w.current_answer_id
+
+        sentence = Sentence(answer_id=a_id, sentence_text=text, user_id=getUID(w.id))
+        sentence.save()
+        return HttpResponseRedirect(reverse(rateSentence))
+ 
+    question = "default question"
+    ans = "default answer"
+    
+    count = Answer.objects.count()
+    if count > 0:
+        random_idx = random.randint(0, count - 1)
+        a = Answer.objects.all()[random_idx]
+        ans = a.answer_text
+
+        w.current_answer = a
+        w.save()
+        try:
+            q = Question.objects.get(id=a.question_id)
+            question = q.question_text
+        except ObjectDoesNotExist:
+            pass
+
+    template_values = {'question':question, 'answer':ans}
+    return render(request, 'phase2makeSentence.html', template_values)
 
 def rateSentence(request):
-    #TODO: based on rating, determine whether -> tag or -> rewrite
-    return render(request, "phase2rateSentence.html")
+    user = request.user
+    w = WorkerTwo.objects.get(id=getWID(user.username))
+    
+    if request.POST.get("AR1"): 
+        if float(request.POST['AR1']) > 2:
+            return HttpResponseRedirect(reverse(tag))
+        else:
+            return HttpResponseRedirect(reverse(rewrite))
+   
+    question = "default question"
+    ans = "default answer"
+    sentence = "default sentence"
+    
+    count = Sentence.objects.count()
+    if count > 0:
+        random_idx = random.randint(0, count - 1)
+        s = Sentence.objects.all()[random_idx]
+        sentence = s.sentence_text
+       
+        try:
+            a = Answer.objects.get(id=s.answer_id)
+            ans = a.answer_text
+            try:
+                q = Question.objects.get(id=a.question_id)
+                question = q.question_text
+            except ObjectDoesNotExist:
+                pass
+        except ObjectDoesNotExist:
+            pass
+       
+        w.current_sentence = s;
+        w.save()
+
+    template_values = {'question':question, 'answer':ans, 'sentence':sentence}
+    return render(request, "phase2rateSentence.html", template_values)
 
 def rewrite(request):
-    return render(request, 'phase2rewriteSentence.html')
+    user = request.user
+    w = WorkerTwo.objects.get(id=getWID(user.username))
+    s_id = w.current_sentence_id
+    s = Sentence.objects.get(id=s_id)
+   
+    if request.POST.get('answer'):
+        text = request.POST.get('answer')
+        s.sentence_text = text;
+        s.save()
+
+        w.tasks -= 1
+        w.save()
+        return HttpResponseRedirect(reverse(connect))
+    else:
+        question = "default question"
+        ans = "default answer"
+        sentence = s.sentence_text 
+
+        try:
+            a = Answer.objects.get(id=s.answer_id)
+            ans = a.answer_text
+            try:
+                q = Question.objects.get(id=a.question_id)
+                question = q.question_text
+            except ObjectDoesNotExist:
+                pass
+        except ObjectDoesNotExist:
+            pass
+ 
+            template_values = {'question':question, 'answer':ans, 'sentence':sentence}
+ 
+    return render(request, 'phase2rewriteSentence.html', template_values)
 
 def tag(request):
-    return render(request, 'phase2tagSentence.html')
- 
+    user = request.user
+    w = WorkerTwo.objects.get(id=getWID(user.username))
+    s_id = w.current_sentence_id
+    s = Sentence.objects.get(id=s_id)
+   
+    if request.POST.get('tags'):
+        tags = request.POST.get('tags')
+        t = Tag(sentence_id=s_id, tag=tags, user_id = getUID(w.id))
+        t.save()
+
+        w.tasks -= 1
+        w.save()
+        return HttpResponseRedirect(reverse(connect))
+    else: 
+        return render(request, 'phase2tagSentence.html', {'sentence': s.sentence_text})
+
+def connect(request):
+    user = request.user
+    w = WorkerTwo.objects.get(id=getWID(user.username))
+    r = w.tasks
+
+    if request.POST.get('next'):
+        return HttpResponseRedirect(reverse(write))
+   
+    template_values = {'task_number':r, 'rem_task_number':5-r, 'user_id':user}
+    if r > 0:
+        return render(request, 'phase1linkingpage.html', template_values)
+    else:
+        return HttpResponseRedirect(reverse(finish2))
+
+
+def finish2(request):
+    user = request.user
+    w = WorkerTwo.objects.get(id=getWID(user.username))
+    code = w.code
+    code = "phase 2 complete!"
+    
+    #logout(request);
+    return render(request, 'phase1finish.html', {'code':code})
+
+

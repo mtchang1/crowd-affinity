@@ -37,5 +37,9 @@ urlpatterns = patterns('',
     (r'^rewrite/?$', rewrite),
     (r'^rateSentence/?$', rateSentence),
     (r'^tag/?$', tag),
+    (r'^connect/?$', connect),
+    (r'^finish2/?$', finish2),
+
+
 
     )
